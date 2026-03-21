@@ -161,7 +161,7 @@
         "SelectedMotorType": null
       },
       "SteerMotor": {
-        "Id": 53,
+        "Id": 8,
         "Name": "BackRightAzimuth",
         "Model": "Talon FX vers. F",
         "CANbus": "rio",
@@ -193,7 +193,7 @@
       "DriveMotorSelectionState": 1,
       "SteerMotorSelectionState": 1,
       "SteerEncoderSelectionState": 1,
-      "IsModuleValidationComplete": true,
+      "IsModuleValidationComplete": false,
       "ValidatedSteerId": 53,
       "ValidatedDriveId": 7,
       "ValidatedEncoderId": 8
