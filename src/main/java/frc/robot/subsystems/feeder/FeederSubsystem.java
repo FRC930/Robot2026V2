@@ -23,7 +23,7 @@ public class FeederSubsystem extends SubsystemBase implements FeederEvents {
 
   private final LoggedTunableGainsBuilder m_feederTunableGains =
       new LoggedTunableGainsBuilder(
-          "Gains/Feeder/", 0.25, 0.0, 0.0, 0.25, 0.0, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+          "Gains/Feeder/", 0.245, 0.0, 0.005, 0.275, 0.0, 0.13, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
   // Jam detection tunable thresholds
   // private final LoggedTunableNumber m_jamVelocityThreshold =

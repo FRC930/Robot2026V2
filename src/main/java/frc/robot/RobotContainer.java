@@ -146,6 +146,8 @@ public class RobotContainer {
       new LoggedTunableNumber("RobotTesting/Indexer/setVelocity", 50.0);
   final LoggedTunableNumber setFeederVelocity =
       new LoggedTunableNumber("RobotTesting/Feeder/setVelocity", 50.0);
+  final LoggedTunableNumber setKickerVelocity =
+      new LoggedTunableNumber("RobotTesting/Kicker/setVelocity", 50.0);
   final LoggedTunableNumber setShooterSpeed =
       new LoggedTunableNumber("RobotTesting/Shooter/setSpeed", 87);
   final LoggedTunableNumber setIntakeRPM =
@@ -181,29 +183,27 @@ public class RobotContainer {
                 (robotPose) -> {});
         aimingService = new AimingService(drive::getLatestSnapshot);
         driveZoneTracker = new DriveZoneTracker(drive::getAutoAlignPose, drive::getChassisSpeeds);
-        intake = new IntakeSubsystem(new IntakeIOTalonFX(1, 2, upperCanbus));
+        intake = new IntakeSubsystem(new IntakeIOTalonFX(10, 11, upperCanbus));
         // intake = new IntakeSubsystem(new IntakeIO() {});
-        extender =
-            new ExtenderSubsystem(
-                new ExtenderIOTalonFX(11, upperCanbus)); // TODO find extendermoterID
+        extender = new ExtenderSubsystem(new ExtenderIOTalonFX(9, 12, upperCanbus));
 
         shooter =
             new ShooterSubsystem(
-                new ShooterIOTalonFX(4, 5, 6, 10, upperCanbus), aimingService::getShooterRPM);
+                new ShooterIOTalonFX(1, 2, 4, 3, upperCanbus), aimingService::getShooterRPM);
         // shooter = new ShooterSubsystem(new ShooterIO() {}, aimingService::getShooterRPM);
 
         indexer =
             new IndexerSubsystem(
                 new IndexerIOTalonFX(
-                    8, upperCanbus, 930)); // TODO set this to an actual motor ID witawey
+                    7, upperCanbus, 6)); // TODO set this to an actual motor ID witawey
         // indexer = new IndexerSubsystem(new IndexerIO() {});
 
-        feeder = new FeederSubsystem(new FeederIOTalonFX(9, upperCanbus));
+        feeder = new FeederSubsystem(new FeederIOTalonFX(8, upperCanbus));
 
         hood =
             new HoodSubsystem(new HoodIOTalonFX(11, upperCanbus), aimingService::getHoodAngleDeg);
         compactor =
-            new CompactorSubsystem(new CompactorIOTalonFX(12, upperCanbus)); // TODO add actual ID
+            new CompactorSubsystem(new CompactorIOTalonFX(20, upperCanbus)); // TODO add actual ID
         // hood = new HoodSubsystem(new HoodIO() {}, aimingService::getHoodAngleDeg);
 
         // The ModuleIOTalonFXS implementation provides an example implementation for
@@ -449,18 +449,22 @@ public class RobotContainer {
     //     .a()
     //     .whileTrue(indexer.getNewSetIndexerVelocityCommand(setIndexerVelocity))
     //     .whileFalse(new InstantCommand(() -> indexer.stop()));
-    // testController
-    //     .b()
-    //     .whileTrue(indexer.getNewSetFeederVelocityCommand(setFeederVelocity))
-    //     .whileFalse(new InstantCommand(() -> indexer.stop()));
-    // testController
-    //     .b()
-    //     .whileTrue(shooter.getNewSetShooterSpeedCommand(setShooterSpeed))
-    //     .whileFalse(new InstantCommand(() -> shooter.stop()));
-    // testController
-    //     .b()
-    //     .whileTrue(intake.getNewSetIntakeVelocityCommand(setIntakeRPM))
-    //     .whileFalse(new InstantCommand(() -> intake.stop()));
+    testController
+        .leftBumper()
+        .whileTrue(indexer.getNewSetIndexerVelocityCommand(setIndexerVelocity))
+        .whileFalse(new InstantCommand(() -> indexer.stop()));
+    testController
+        .leftBumper()
+        .whileTrue(feeder.getNewSetFeederVelocityCommand(setFeederVelocity))
+        .whileFalse(new InstantCommand(() -> feeder.stop()));
+    testController
+        .leftBumper()
+        .whileTrue(indexer.getNewSetKickerVelocityCommand(setKickerVelocity))
+        .whileFalse(new InstantCommand(() -> indexer.stop()));
+    testController
+        .rightBumper()
+        .whileTrue(shooter.getNewSetShooterSpeedCommand(setShooterSpeed))
+        .whileFalse(new InstantCommand(() -> shooter.stop()));
     // testController
     //     .a()
     //     .whileTrue(
@@ -470,24 +474,9 @@ public class RobotContainer {
     //         intake.getNewSetIntakeExtenderAngleCommand(
     //             () -> Degrees.of(setIntakeExtenderDown.get()), false));
     // testController
-    //     .a()
-    //     .povDown()
-    //     .whileTrue(indexer.getNewSetFeederVelocityCommand(setFeederVelocity))
-    //     .whileFalse(new InstantCommand(() -> indexer.stop()));
-    // testController
-    //     .b()
-    //     .whileTrue(shooter.getNewSetShooterSpeedCommand(setShooterSpeed))
-    //     .whileFalse(new InstantCommand(() -> shooter.stop()));
-    // testController
     //     .y()
     //     .whileTrue(intake.getNewSetIntakeVelocityCommand(setIntakeRPM))
     //     .whileFalse(new InstantCommand(() -> intake.stop()));
-    // testController
-    //     .povUp()
-    //     .whileTrue(intake.getNewSetIntakeExtenderVoltsCommand(setIntakeExtenderVolts, false))
-    //     .whileFalse(
-    //         intake.getNewSetIntakeExtenderVoltsCommand(
-    //             setIntakeExtenderVolts, true)); // Default value for intake extender volts
     // testController
     //     .b()
     //     .whileTrue(hood.getNewSetHoodAngleCommand(setHoodAngle))

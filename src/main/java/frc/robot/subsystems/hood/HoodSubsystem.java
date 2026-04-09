@@ -23,7 +23,7 @@ public class HoodSubsystem extends SubsystemBase implements HoodEvents {
   private final HoodIO m_IO;
   private volatile boolean shouldThreadCommand = false;
 
-  private final EnumState<HoodState> currentGoal = new EnumState<>("Hood/States", HoodState.AIMING);
+  private final EnumState<HoodState> currentGoal = new EnumState<>("Hood/States", HoodState.IDLE);
 
   public LoggedTunableGainsBuilder tunableGains =
       new LoggedTunableGainsBuilder(
@@ -73,11 +73,10 @@ public class HoodSubsystem extends SubsystemBase implements HoodEvents {
     m_IO.updateInputs(logged);
     Logger.processInputs("RobotState/Hood", logged);
     HoodState state = currentGoal.get();
-    // TODO find ​out​ ​​why​ state​​​ ​​​is​​ not​​ being​ ​​​​​​set to​ aiming​
     shouldThreadCommand = (state == HoodState.AIMING);
     switch (state) {
       case IDLE:
-        // m_IO.stop();
+        getNewSetHoodAngleCommand(() -> 0.0);
         break;
       case AIMING:
         break; // ​250Hz ​​thread​ handles​​ ​​​​motor​ commands

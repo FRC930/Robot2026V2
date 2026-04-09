@@ -8,11 +8,13 @@ import static edu.wpi.first.units.Units.RotationsPerSecond;
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.units.measure.Distance;
 import frc.robot.util.Gains;
@@ -21,6 +23,7 @@ import frc.robot.util.PhoenixUtil;
 public class ExtenderIOTalonFX implements ExtenderIO {
   public MotionMagicTorqueCurrentFOC Request;
   public TalonFX extenderMotor;
+  public TalonFX followerMotor;
 
   public ExtenderInputs inputs;
 
@@ -28,8 +31,9 @@ public class ExtenderIOTalonFX implements ExtenderIO {
 
   private final NeutralOut m_brake = new NeutralOut();
 
-  public ExtenderIOTalonFX(int motorID, CANBus canbus) {
-    extenderMotor = new TalonFX(motorID, canbus);
+  public ExtenderIOTalonFX(int extenderMotorID, int followerMotorID, CANBus canbus) {
+    extenderMotor = new TalonFX(extenderMotorID, canbus);
+    followerMotor = new TalonFX(followerMotorID, canbus);
     m_setPoint = Inches.of(0.0);
     Request = new MotionMagicTorqueCurrentFOC(0);
 
@@ -37,19 +41,35 @@ public class ExtenderIOTalonFX implements ExtenderIO {
   }
 
   private void configureTalons() {
-    TalonFXConfiguration cfg = new TalonFXConfiguration();
-    cfg.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    cfg.Voltage.PeakForwardVoltage = 12;
-    cfg.Voltage.PeakReverseVoltage = 12;
-    cfg.CurrentLimits.StatorCurrentLimit = 80;
-    cfg.CurrentLimits.StatorCurrentLimitEnable = true;
-    cfg.CurrentLimits.SupplyCurrentLimit = 30;
-    cfg.CurrentLimits.SupplyCurrentLimitEnable = true;
-    cfg.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    TalonFXConfiguration cfgExtender = new TalonFXConfiguration();
+    cfgExtender.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    cfgExtender.Voltage.PeakForwardVoltage = 12;
+    cfgExtender.Voltage.PeakReverseVoltage = 12;
+    cfgExtender.CurrentLimits.StatorCurrentLimit = 80;
+    cfgExtender.CurrentLimits.StatorCurrentLimitEnable = true;
+    cfgExtender.CurrentLimits.SupplyCurrentLimit = 30;
+    cfgExtender.CurrentLimits.SupplyCurrentLimitEnable = true;
+    cfgExtender.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
-    cfg.Feedback.SensorToMechanismRatio = ExtenderSubsystem.REDUCTION;
+    cfgExtender.Feedback.SensorToMechanismRatio = ExtenderSubsystem.REDUCTION;
 
-    PhoenixUtil.tryUntilOk(5, () -> extenderMotor.getConfigurator().apply(cfg));
+    PhoenixUtil.tryUntilOk(5, () -> extenderMotor.getConfigurator().apply(cfgExtender));
+
+    TalonFXConfiguration cfgFollower = new TalonFXConfiguration();
+    cfgFollower.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    cfgFollower.Voltage.PeakForwardVoltage = 12;
+    cfgFollower.Voltage.PeakReverseVoltage = 12;
+    cfgFollower.CurrentLimits.StatorCurrentLimit = 80;
+    cfgFollower.CurrentLimits.StatorCurrentLimitEnable = true;
+    cfgFollower.CurrentLimits.SupplyCurrentLimit = 30;
+    cfgFollower.CurrentLimits.SupplyCurrentLimitEnable = true;
+    cfgFollower.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+
+    cfgFollower.Feedback.SensorToMechanismRatio = ExtenderSubsystem.REDUCTION;
+
+    PhoenixUtil.tryUntilOk(5, () -> followerMotor.getConfigurator().apply(cfgFollower));
+    followerMotor.setControl(
+        new Follower(extenderMotor.getDeviceID(), MotorAlignmentValue.Opposed));
   }
 
   @Override

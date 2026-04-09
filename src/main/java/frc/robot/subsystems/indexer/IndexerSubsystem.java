@@ -26,7 +26,9 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
 
   private final LoggedTunableGainsBuilder m_indexerTunableGains =
       new LoggedTunableGainsBuilder(
-          "Gains/Indexer/", 2.5, 0.0, 0.0, 0.3, 0.0, 2.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+          "Gains/Indexer/", 0.185, 0.0, 0.0, 0.28, 0.0, .125, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+  private final LoggedTunableGainsBuilder m_kickerTunableGains =
+      new LoggedTunableGainsBuilder("Gains/Kicker/", 0.55, 0, 0025, 0.25, 0, 0.35, 0, 0, 0, 0, 0, 0);
 
   // Jam detection tunable thresholds
   private final LoggedTunableNumber m_jamVelocityThreshold =
@@ -61,6 +63,7 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
     m_logged.kickerVelocity = RPM.mutable(0);
     m_logged.kickerSetPoint = RPM.mutable(0);
     m_IO.setIndexerGains(m_indexerTunableGains.build());
+    m_IO.setKickerGains(m_kickerTunableGains.build());
   }
 
   public void setTestingState() {
@@ -111,6 +114,7 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
     Logger.recordOutput("Indexer/JamRetryCount", m_jamRetryCount);
 
     m_indexerTunableGains.ifGainsHaveChanged((gains) -> m_IO.setIndexerGains(gains));
+    m_kickerTunableGains.ifGainsHaveChanged((gains) -> m_IO.setKickerGains(gains));
   }
 
   private void checkForJam() {
@@ -185,6 +189,14 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
     return new InstantCommand(
         () -> {
           m_IO.setIndexerTarget(RPM.of(velocity.getAsDouble()));
+        },
+        this);
+  }
+
+  public Command getNewSetKickerVelocityCommand(DoubleSupplier velocity) {
+    return new InstantCommand(
+        () -> {
+          m_IO.setKickerTarget(RPM.of(velocity.getAsDouble()));
         },
         this);
   }
