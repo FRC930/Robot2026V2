@@ -227,8 +227,9 @@ public class RobotContainer {
             new AprilTagVision(
                 drive::setPose,
                 drive::addVisionMeasurementAutoAlign,
-                new VisionIOLimelight(frontCamera, drive::getRotation),
-                new VisionIOQuest(drive::getAutoAlignPose, questCamName));
+                new VisionIOLimelight(frontCamera, drive::getRotation)
+                //,new VisionIOQuest(drive::getAutoAlignPose, questCamName)
+                );
 
         break;
 
