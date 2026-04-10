@@ -12,6 +12,8 @@ public interface ExtenderIO {
   @AutoLog
   public static class ExtenderInputs {
     public MutDistance distance;
+    public MutDistance followerDistance;
+    public MutDistance differentialPositionError;
     public MutLinearVelocity velocity;
     public MutDistance setPoint;
     public MutVoltage voltage;
@@ -30,5 +32,8 @@ public interface ExtenderIO {
   ;
 
   public default void setGains(Gains gains) {}
+  ;
+
+  public default void setDifferentialGains(Gains gains) {}
   ;
 }

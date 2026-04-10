@@ -51,10 +51,15 @@ public class ExtenderSubsystem extends SubsystemBase implements ExtenderEvents {
   public LoggedTunableGainsBuilder tunableGains =
       new LoggedTunableGainsBuilder("Gains/Extender/", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
+  public LoggedTunableGainsBuilder differentialTunableGains =
+      new LoggedTunableGainsBuilder("Gains/ExtenderDiff/", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
   public ExtenderSubsystem(ExtenderIO IO) {
     m_IO = IO;
 
     logged.distance = Inches.mutable(0);
+    logged.followerDistance = Inches.mutable(0);
+    logged.differentialPositionError = Inches.mutable(0);
     logged.velocity = InchesPerSecond.mutable(0);
     logged.setPoint = Meters.mutable(0);
     logged.supplyCurrent = Amps.mutable(0);
@@ -99,6 +104,8 @@ public class ExtenderSubsystem extends SubsystemBase implements ExtenderEvents {
         break;
     }
     tunableGains.ifGainsHaveChanged((gains) -> this.m_IO.setGains(gains));
+    differentialTunableGains.ifGainsHaveChanged((gains) -> this.m_IO.setDifferentialGains(gains));
+    Logger.recordOutput("Extender/DifferentialError", logged.differentialPositionError.in(Inches));
   }
 
   private void updateAgitation() {
