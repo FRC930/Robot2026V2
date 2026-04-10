@@ -76,7 +76,7 @@ public class HoodSubsystem extends SubsystemBase implements HoodEvents {
     shouldThreadCommand = (state == HoodState.AIMING);
     switch (state) {
       case IDLE:
-        getNewSetHoodAngleCommand(() -> 0.0);
+        m_IO.setHoodTarget(Degrees.of(0.0));
         break;
       case AIMING:
         break; // ​250Hz ​​thread​ handles​​ ​​​​motor​ commands

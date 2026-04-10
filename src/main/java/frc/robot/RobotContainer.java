@@ -10,7 +10,6 @@ package frc.robot;
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.RPM;
 import static frc.robot.subsystems.vision.VisionConstants.frontCamera;
-import static frc.robot.subsystems.vision.VisionConstants.questCamName;
 import static frc.robot.subsystems.vision.VisionConstants.robotToFrontCamera;
 
 import com.ctre.phoenix6.CANBus;
@@ -82,7 +81,6 @@ import frc.robot.subsystems.vision.AprilTagVision;
 import frc.robot.subsystems.vision.VisionIO;
 import frc.robot.subsystems.vision.VisionIOLimelight;
 import frc.robot.subsystems.vision.VisionIOPhotonVisionSim;
-import frc.robot.subsystems.vision.VisionIOQuest;
 import frc.robot.util.AllEvents;
 import frc.robot.util.GoalBehavior;
 import frc.robot.util.HighFrequencyLoop;
@@ -228,7 +226,7 @@ public class RobotContainer {
                 drive::setPose,
                 drive::addVisionMeasurementAutoAlign,
                 new VisionIOLimelight(frontCamera, drive::getRotation)
-                //,new VisionIOQuest(drive::getAutoAlignPose, questCamName)
+                // ,new VisionIOQuest(drive::getAutoAlignPose, questCamName)
                 );
 
         break;
