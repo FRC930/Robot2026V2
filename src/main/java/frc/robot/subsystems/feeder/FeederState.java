@@ -9,9 +9,9 @@ import java.util.function.DoubleSupplier;
 public enum FeederState {
   TESTING(() -> 0.0),
   IDLE(() -> 0.0),
-  FEEDING(new LoggedTunableNumber("Indexer/setFeederPoint", 4000)),
-  REVERSING(new LoggedTunableNumber("Indexer/setFeederPointReverse", -2000)),
-  INTAKING(new LoggedTunableNumber("Indexer/setIndexerPointIntaking", 2000));
+  FEEDING(new LoggedTunableNumber("Feeder/setVelocity", 4000)),
+  REVERSING(new LoggedTunableNumber("Feeder/setVelocityReverse", -2000)),
+  INTAKING(new LoggedTunableNumber("Feeder/setVelocityIntaking", 2000));
 
   private DoubleSupplier m_feederVelocity;
 

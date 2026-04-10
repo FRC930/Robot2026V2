@@ -153,11 +153,11 @@ public class DriveCommands {
                           drive.getRotation().getRadians(), filter.calculate(controllerAngle));
                 }
               } else if (forceAutoAim || useAiming) {
-                // sets the controllerAngle variable to what the aiming code says
-                // the turret should be so when we set the robot to that angle, it aims correctly
+                // sets the controllerAngle variable to what the aiming service says
+                // the robot should face so the shooter is aimed correctly
                 double controllerAngle =
                     // (Math.atan2(-ySupplier.getAsDouble(), -xSupplier.getAsDouble()));
-                    Math.toRadians(aimingService.getTurretAngleDeg());
+                    Math.toRadians(aimingService.getAimAngleDeg());
 
                 omega =
                     angleController.calculate(
