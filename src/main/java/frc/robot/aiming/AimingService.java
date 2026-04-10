@@ -52,6 +52,11 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
   private static final LoggedTunableNumber hoodEmaAlpha =
       new LoggedTunableNumber("Aiming/Smoothing/hoodEmaAlpha", 0.10);
 
+  private static final LoggedTunableNumber negativeAimingCompensation =
+      new LoggedTunableNumber("Aiming/negativeAimingCompensation", -30.00);
+  private static final LoggedTunableNumber positiveAimingCompensation =
+      new LoggedTunableNumber("Aiming/positiveAimingCompensation", 30.00);
+
   // EMA state (only written by AimingThread, no synchronization needed)
   private double smoothedRPM = 0.0;
   private double smoothedTurretDeg = 0.0;
@@ -222,10 +227,12 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
     double distanceOffset = horizontalDistance - AimingConstants.RPM_REF_DISTANCE_M.get();
     rpm *= 1.0 + AimingConstants.RPM_DISTANCE_SCALE.get() * distanceOffset;
 
+    double robotRotation = robotPose.getRotation().getDegrees();
+
     // Clamp and validate
     boolean turretInRange =
-        compensatedTurretDeg >= AimingConstants.TURRET_MIN_DEG
-            && compensatedTurretDeg <= AimingConstants.TURRET_MAX_DEG;
+        robotRotation >= turretAngleDeg + negativeAimingCompensation.get()
+            && robotRotation <= turretAngleDeg + positiveAimingCompensation.get();
     double launcherAngleDeg = Math.toDegrees(launcherAngleRad);
     boolean hoodInRange =
         launcherAngleDeg >= AimingConstants.HOOD_MIN_DEG

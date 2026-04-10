@@ -254,7 +254,8 @@ public class RobotContainer {
             new DriveZoneTracker(
                 driveSimulation::getSimulatedDriveTrainPose,
                 driveSimulation::getDriveTrainSimulatedChassisSpeedsRobotRelative);
-        intake = new IntakeSubsystem(new IntakeIOSim(driveSimulation));
+        intake =
+            new IntakeSubsystem(new IntakeIOSim(driveSimulation, aimingService::isSolutionValid));
         extender = new ExtenderSubsystem(new ExtenderIOSim());
         indexer = new IndexerSubsystem(new IndexerIOSim());
         feeder = new FeederSubsystem(new FeederIOSim());

@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.aiming.AimingService;
+import java.util.function.BooleanSupplier;
 import org.ironmaple.simulation.IntakeSimulation;
 import org.ironmaple.simulation.SimulatedArena;
 import org.ironmaple.simulation.drivesims.AbstractDriveTrainSimulation;
@@ -39,6 +40,7 @@ public class IntakeIOSim implements IntakeIO {
   private AngularVelocity m_rollerVelocitySetPoint = RPM.mutable(0.0);
 
   private final FlywheelSim rollerFlyWheelSim;
+  private final BooleanSupplier isSolutionValid;
   private SimpleMotorFeedforward rollerFF = new SimpleMotorFeedforward(0.0, 0.002, 0.0);
   // NOTE: ProfilePID sorta worked if did not have any FF KV BUT did not reach goal
   // private ProfiledPIDController rollerPID =
@@ -47,7 +49,7 @@ public class IntakeIOSim implements IntakeIO {
 
   private int counter = 0;
 
-  public IntakeIOSim(AbstractDriveTrainSimulation driveTrain) {
+  public IntakeIOSim(AbstractDriveTrainSimulation driveTrain, BooleanSupplier isSolutionValid) {
 
     // Setup Intake roller
     rollerFlyWheelSim =
@@ -72,6 +74,8 @@ public class IntakeIOSim implements IntakeIO {
             IntakeSimulation.IntakeSide.FRONT,
             // The intake can hold up to 67 gamepiece
             100);
+
+    this.isSolutionValid = isSolutionValid;
   }
 
   public void setRunning(boolean runIntake) {
@@ -162,10 +166,14 @@ public class IntakeIOSim implements IntakeIO {
     counter++;
     if (counter > 3.5) {
       if (intakeSim.getGamePiecesAmount() > 0) {
-        intakeSim.obtainGamePieceFromIntake();
-        intakeSim.obtainGamePieceFromIntake();
-        intakeSim.obtainGamePieceFromIntake();
-        AimingService.trajectorySim.setSpawnFuelOnGround(true);
+        if (isSolutionValid.getAsBoolean()) {
+          intakeSim.obtainGamePieceFromIntake();
+          intakeSim.obtainGamePieceFromIntake();
+          intakeSim.obtainGamePieceFromIntake();
+          AimingService.trajectorySim.setSpawnFuelOnGround(true);
+        } else {
+          AimingService.trajectorySim.setSpawnFuelOnGround(false);
+        }
       } else {
         AimingService.trajectorySim.setSpawnFuelOnGround(false);
       }
