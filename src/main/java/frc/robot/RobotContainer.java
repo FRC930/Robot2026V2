@@ -198,8 +198,7 @@ public class RobotContainer {
 
         feeder = new FeederSubsystem(new FeederIOTalonFX(8, upperCanbus));
 
-        hood =
-            new HoodSubsystem(new HoodIOTalonFX(11, upperCanbus), aimingService::getHoodAngleDeg);
+        hood = new HoodSubsystem(new HoodIOTalonFX(5, upperCanbus), aimingService::getHoodAngleDeg);
         compactor =
             new CompactorSubsystem(new CompactorIOTalonFX(20, upperCanbus)); // TODO add actual ID
         // hood = new HoodSubsystem(new HoodIO() {}, aimingService::getHoodAngleDeg);

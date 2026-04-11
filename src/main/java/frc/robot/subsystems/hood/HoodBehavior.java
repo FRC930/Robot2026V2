@@ -12,12 +12,6 @@ public class HoodBehavior extends SubsystemBehavior {
 
   @Override
   public void configure(AllEvents events) {
-    // events
-    //     .goals()
-    //     .isIntakingTrigger()
-    //     .or(events.goals().isShootingTrigger())
-    //     .whileTrue(hood.aimCommand());
-    // TODO if idle hood set idle command on false or while false hood aiming command
     events.goals().isShootingTrigger().whileTrue(hood.aimCommand()).whileFalse(hood.idleCommand());
   }
 }

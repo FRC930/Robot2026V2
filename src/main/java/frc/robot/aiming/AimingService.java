@@ -20,8 +20,8 @@ import java.util.function.Supplier;
 import org.littletonrobotics.junction.Logger;
 
 /**
- * Central aiming service that computes turret angle, hood angle, and shooter RPM. Computation runs
- * at 250Hz via AimingThread; logging and visualization run at 50Hz via periodic().
+ * Central aiming service that computes robot aim angle, hood angle, and shooter RPM. Computation
+ * runs at 250Hz via AimingThread; logging and visualization run at 50Hz via periodic().
  */
 public class AimingService extends VirtualSubsystem implements AimingEvents {
 
@@ -34,7 +34,7 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
   private volatile AimingTarget currentTarget = AimingTarget.HUB;
 
   // Volatile outputs written by computeAimingSolution() at 250Hz
-  private volatile double turretAngleDeg = 0.0;
+  private volatile double aimAngleDeg = 0.0;
   private volatile double hoodAngleDeg = 45.0;
   private volatile double shooterRPM = 0.0;
   private volatile double distanceToTargetM = 0.0;
@@ -47,8 +47,8 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
   // EMA smoothing — alpha in (0, 1]. Lower = smoother, 1.0 = no filtering.
   private static final LoggedTunableNumber rpmEmaAlpha =
       new LoggedTunableNumber("Aiming/Smoothing/rpmEmaAlpha", 0.08);
-  private static final LoggedTunableNumber turretEmaAlpha =
-      new LoggedTunableNumber("Aiming/Smoothing/turretEmaAlpha", 0.15);
+  private static final LoggedTunableNumber aimEmaAlpha =
+      new LoggedTunableNumber("Aiming/Smoothing/aimEmaAlpha", 0.15);
   private static final LoggedTunableNumber hoodEmaAlpha =
       new LoggedTunableNumber("Aiming/Smoothing/hoodEmaAlpha", 0.10);
 
@@ -59,7 +59,7 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
 
   // EMA state (only written by AimingThread, no synchronization needed)
   private double smoothedRPM = 0.0;
-  private double smoothedTurretDeg = 0.0;
+  private double smoothedAimDeg = 0.0;
   private double smoothedHoodDeg = 0.0;
   private boolean emaInitialized = false;
   private boolean usingFarAngle = false;
@@ -130,15 +130,15 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
       PoseSnapshot snapshot = snapshotSupplier.get();
       if (solutionValid) {
         Rotation2d heading = snapshot.heading();
-        Translation2d turretFieldPos = computeTurretFieldPosition(snapshot.pose(), heading);
-        double fieldTurretYaw = heading.getRadians() + Math.PI + Math.toRadians(turretAngleDeg);
-        Translation2d turretVelocity = computeTurretVelocity(snapshot.chassisSpeeds(), heading);
+        Translation2d shooterFieldPos = computeShooterFieldPosition(snapshot.pose(), heading);
+        double fieldAimYaw = heading.getRadians() + Math.PI + Math.toRadians(aimAngleDeg);
+        Translation2d shooterVelocity = computeShooterVelocity(snapshot.chassisSpeeds(), heading);
         trajectorySim.simulate(
-            turretFieldPos,
-            fieldTurretYaw,
+            shooterFieldPos,
+            fieldAimYaw,
             cachedLauncherAngleRad, // TODO fix on blue side
             cachedLauncherSpeed,
-            turretVelocity);
+            shooterVelocity);
       } else {
         trajectorySim.publishEmpty();
       }
@@ -147,28 +147,28 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
 
   private void computeForPose(Pose2d robotPose, ChassisSpeeds speeds, Rotation2d heading) {
     Translation3d target = getTargetPosition();
-    Translation2d turretFieldPos = computeTurretFieldPosition(robotPose, heading);
+    Translation2d shooterFieldPos = computeShooterFieldPosition(robotPose, heading);
 
     // Compute distances to target
-    double dx = target.getX() - turretFieldPos.getX();
-    double dy = target.getY() - turretFieldPos.getY();
+    double dx = target.getX() - shooterFieldPos.getX();
+    double dy = target.getY() - shooterFieldPos.getY();
     double horizontalDistance = Math.hypot(dx, dy);
-    double verticalDistance = target.getZ() - AimingConstants.TURRET_PIVOT_HEIGHT_METERS;
+    double verticalDistance = target.getZ() - AimingConstants.SHOOTER_PIVOT_HEIGHT_METERS;
 
     distanceToTargetM = horizontalDistance;
 
-    // Field-frame angle to target, converted to turret-frame (0° = robot backward)
+    // Field-frame angle to target, converted to robot aim frame (0° = robot backward)
     double fieldAngleToTargetRad = Math.atan2(dy, dx);
-    double turretAngleRad =
+    double aimAngleRad =
         MathUtil.angleModulus(fieldAngleToTargetRad - /*heading.getRadians() -*/ Math.PI);
-    double rawTurretAngleDeg = Math.toDegrees(turretAngleRad);
+    double rawAimAngleDeg = Math.toDegrees(aimAngleRad);
 
-    // Velocity compensation: project turret velocity onto radial and tangential axes
-    Translation2d turretVelocity = computeTurretVelocity(speeds, heading);
+    // Velocity compensation: project shooter velocity onto radial and tangential axes
+    Translation2d shooterVelocity = computeShooterVelocity(speeds, heading);
     double ux = Math.cos(fieldAngleToTargetRad);
     double uy = Math.sin(fieldAngleToTargetRad);
-    double vRadial = turretVelocity.getX() * ux + turretVelocity.getY() * uy;
-    double vTangential = -turretVelocity.getX() * uy + turretVelocity.getY() * ux;
+    double vRadial = shooterVelocity.getX() * ux + shooterVelocity.getY() * uy;
+    double vTangential = -shooterVelocity.getX() * uy + shooterVelocity.getY() * ux;
 
     double launchAngleDeg;
     if (currentTarget == AimingTarget.HUB) {
@@ -216,7 +216,7 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
 
     // Yaw correction: aim off-target to cancel tangential velocity
     double yawCorrectionRad = Math.atan2(-vTangential, launcherRadial);
-    double compensatedTurretDeg = rawTurretAngleDeg + Math.toDegrees(yawCorrectionRad);
+    double compensatedAimDeg = rawAimAngleDeg + Math.toDegrees(yawCorrectionRad);
 
     // Convert launcher speed to RPM
     double shooterSurfaceSpeedMps = launcherSpeed / AimingConstants.SPEED_TRANSFER_RATIO.get();
@@ -230,9 +230,9 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
     double robotRotation = robotPose.getRotation().getDegrees();
 
     // Clamp and validate
-    boolean turretInRange =
-        robotRotation >= turretAngleDeg + negativeAimingCompensation.get()
-            && robotRotation <= turretAngleDeg + positiveAimingCompensation.get();
+    boolean aimInRange =
+        robotRotation >= aimAngleDeg + negativeAimingCompensation.get()
+            && robotRotation <= aimAngleDeg + positiveAimingCompensation.get();
     double launcherAngleDeg = Math.toDegrees(launcherAngleRad);
     boolean hoodInRange =
         launcherAngleDeg >= AimingConstants.HOOD_MIN_DEG
@@ -240,11 +240,13 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
     boolean rpmInRange =
         rpm >= AimingConstants.SHOOTER_MIN_RPM && rpm <= AimingConstants.SHOOTER_MAX_RPM;
 
-    solutionValid = turretInRange && hoodInRange && rpmInRange;
+    solutionValid = aimInRange && hoodInRange && rpmInRange;
 
-    double clampedTurret =
+    double clampedAim =
         MathUtil.clamp(
-            compensatedTurretDeg, AimingConstants.TURRET_MIN_DEG, AimingConstants.TURRET_MAX_DEG);
+            compensatedAimDeg,
+            AimingConstants.ROBOT_AIM_MIN_DEG,
+            AimingConstants.ROBOT_AIM_MAX_DEG);
     double clampedHood =
         MathUtil.clamp(
             launcherAngleDeg, AimingConstants.HOOD_MIN_DEG, AimingConstants.HOOD_MAX_DEG);
@@ -253,20 +255,20 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
 
     // EMA smoothing to reduce high-frequency noise from pose estimation
     if (!emaInitialized) {
-      smoothedTurretDeg = clampedTurret;
+      smoothedAimDeg = clampedAim;
       smoothedHoodDeg = clampedHood;
       smoothedRPM = clampedRPM;
       emaInitialized = true;
     } else {
-      double aT = turretEmaAlpha.get();
+      double aT = aimEmaAlpha.get();
       double aH = hoodEmaAlpha.get();
       double aR = rpmEmaAlpha.get();
-      smoothedTurretDeg = aT * clampedTurret + (1.0 - aT) * smoothedTurretDeg;
+      smoothedAimDeg = aT * clampedAim + (1.0 - aT) * smoothedAimDeg;
       smoothedHoodDeg = aH * clampedHood + (1.0 - aH) * smoothedHoodDeg;
       smoothedRPM = aR * clampedRPM + (1.0 - aR) * smoothedRPM;
     }
 
-    turretAngleDeg = smoothedTurretDeg;
+    aimAngleDeg = smoothedAimDeg;
     hoodAngleDeg = smoothedHoodDeg;
     shooterRPM = smoothedRPM;
 
@@ -299,18 +301,18 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
     }
   }
 
-  private Translation2d computeTurretFieldPosition(Pose2d robotPose, Rotation2d heading) {
-    Translation2d rotatedOffset = AimingConstants.TURRET_OFFSET_FROM_CENTER.rotateBy(heading);
+  private Translation2d computeShooterFieldPosition(Pose2d robotPose, Rotation2d heading) {
+    Translation2d rotatedOffset = AimingConstants.SHOOTER_OFFSET_FROM_CENTER.rotateBy(heading);
     return robotPose.getTranslation().plus(rotatedOffset);
   }
 
-  private Translation2d computeTurretVelocity(ChassisSpeeds speeds, Rotation2d heading) {
+  private Translation2d computeShooterVelocity(ChassisSpeeds speeds, Rotation2d heading) {
     double cos = heading.getCos();
     double sin = heading.getSin();
     double vxField = speeds.vxMetersPerSecond * cos - speeds.vyMetersPerSecond * sin;
     double vyField = speeds.vxMetersPerSecond * sin + speeds.vyMetersPerSecond * cos;
 
-    Translation2d rotatedOffset = AimingConstants.TURRET_OFFSET_FROM_CENTER.rotateBy(heading);
+    Translation2d rotatedOffset = AimingConstants.SHOOTER_OFFSET_FROM_CENTER.rotateBy(heading);
     double omega = speeds.omegaRadiansPerSecond;
     double vxRot = -omega * rotatedOffset.getY();
     double vyRot = omega * rotatedOffset.getX();
@@ -319,7 +321,7 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
   }
 
   private void logOutputs() {
-    Logger.recordOutput("Aiming/TurretAngleDeg", turretAngleDeg);
+    Logger.recordOutput("Aiming/AimAngleDeg", aimAngleDeg);
     Logger.recordOutput("Aiming/HoodAngleDeg", hoodAngleDeg);
     Logger.recordOutput("Aiming/ShooterRPM", shooterRPM);
     Logger.recordOutput("Aiming/DistanceToTargetM", distanceToTargetM);
@@ -329,8 +331,8 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
     Logger.recordOutput("Aiming/TargetPosition", getTargetPosition());
   }
 
-  public double getTurretAngleDeg() {
-    return turretAngleDeg;
+  public double getAimAngleDeg() {
+    return aimAngleDeg;
   }
 
   public double getHoodAngleDeg() {

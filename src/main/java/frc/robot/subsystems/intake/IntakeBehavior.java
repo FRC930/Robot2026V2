@@ -11,7 +11,6 @@ public class IntakeBehavior extends SubsystemBehavior {
     this.intake = intake;
   }
 
-  // TODO may have to wait for turrent to be out of position and may have to be in behavior.
   @Override
   public void configure(AllEvents events) {
     events.goals().isIdleTrigger().whileTrue(this.intake.idleCommand());
