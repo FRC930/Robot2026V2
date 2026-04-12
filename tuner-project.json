@@ -217,7 +217,7 @@
     "SwerveModuleType": 9,
     "SwerveModuleConfiguration": {
       "ModuleBrand": -1,
-      "DriveRatio": 6.75,
+      "DriveRatio": 6,
       "SteerRatio": 24.1,
       "CouplingRatio": 0.0,
       "CustomName": ""
