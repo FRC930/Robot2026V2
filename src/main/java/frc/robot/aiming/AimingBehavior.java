@@ -17,10 +17,12 @@ public class AimingBehavior extends SubsystemBehavior {
   public void configure(AllEvents events) {
     Trigger inNeutralZone = events.drive().isInNeutralZone();
     Trigger onUpperHalf = events.drive().isOnUpperFieldHalf();
+    Trigger isOpponentZone = events.drive().isInOpponentZone();
 
     // Aim at hub when outside the neutral zone
     inNeutralZone
         .negate()
+        .and(isOpponentZone.negate())
         .onTrue(Commands.runOnce(() -> aimingService.setTarget(AimingTarget.HUB)));
 
     // In neutral zone, pass to appropriate zone based on field half
@@ -31,5 +33,13 @@ public class AimingBehavior extends SubsystemBehavior {
     inNeutralZone
         .and(onUpperHalf)
         .onTrue(Commands.runOnce(() -> aimingService.setTarget(AimingTarget.PASS_HIGH)));
+
+    // isOpponentZone
+    //     .and(onUpperHalf.negate())
+    //     .onTrue(Commands.runOnce(() -> aimingService.setTarget(AimingTarget.PASS_LOW)));
+
+    // isOpponentZone
+    //     .and(onUpperHalf)
+    //     .onTrue(Commands.runOnce(() -> aimingService.setTarget(AimingTarget.PASS_HIGH)));
   }
 }

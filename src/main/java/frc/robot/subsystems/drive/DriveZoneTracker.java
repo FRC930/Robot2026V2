@@ -16,6 +16,7 @@ public class DriveZoneTracker extends VirtualSubsystem implements DriveEvents {
   private boolean inNeutralZone = false;
   private boolean onUpperFieldHalf = false;
   private boolean notMoving = false;
+  private boolean inOpponentZone = false;
 
   private static final LoggedTunableNumber notMovingThreshold =
       new LoggedTunableNumber("Drive/notMovingThresholdMps", 0.1);
@@ -23,6 +24,7 @@ public class DriveZoneTracker extends VirtualSubsystem implements DriveEvents {
   private final Trigger inNeutralZoneTrigger = new Trigger(() -> inNeutralZone);
   private final Trigger onUpperFieldHalfTrigger = new Trigger(() -> onUpperFieldHalf);
   private final Trigger notMovingTrigger = new Trigger(() -> notMoving);
+  private final Trigger inOpponentTrigger = new Trigger(() -> inOpponentZone);
 
   public DriveZoneTracker(Supplier<Pose2d> poseSupplier, Supplier<ChassisSpeeds> speedsSupplier) {
     this.poseSupplier = poseSupplier;
@@ -39,6 +41,9 @@ public class DriveZoneTracker extends VirtualSubsystem implements DriveEvents {
         x >= FieldConstants.LinesVertical.neutralZoneNear
             && x <= FieldConstants.LinesVertical.neutralZoneFar;
     onUpperFieldHalf = y > FieldConstants.LinesHorizontal.center;
+    inOpponentZone =
+        x >= FieldConstants.LinesVertical.oppAllianceZone
+            && x <= FieldConstants.LinesVertical.oppAllianceZone;
 
     ChassisSpeeds speeds = speedsSupplier.get();
     double linearSpeed = Math.hypot(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond);
@@ -47,6 +52,7 @@ public class DriveZoneTracker extends VirtualSubsystem implements DriveEvents {
     Logger.recordOutput("DriveZone/InNeutralZone", inNeutralZone);
     Logger.recordOutput("DriveZone/OnUpperFieldHalf", onUpperFieldHalf);
     Logger.recordOutput("DriveZone/NotMoving", notMoving);
+    Logger.recordOutput("DriveZone/inOpponentZone", inOpponentZone);
   }
 
   @Override
@@ -62,5 +68,10 @@ public class DriveZoneTracker extends VirtualSubsystem implements DriveEvents {
   @Override
   public Trigger isNotMoving() {
     return notMovingTrigger;
+  }
+
+  @Override
+  public Trigger isInOpponentZone() {
+    return inNeutralZoneTrigger;
   }
 }

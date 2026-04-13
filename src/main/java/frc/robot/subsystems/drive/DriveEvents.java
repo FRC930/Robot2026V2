@@ -8,4 +8,6 @@ public interface DriveEvents {
   Trigger isOnUpperFieldHalf();
 
   Trigger isNotMoving();
+
+  Trigger isInOpponentZone();
 }
