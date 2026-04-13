@@ -224,6 +224,8 @@ public class RobotContainer {
             new AprilTagVision(
                 drive::setPose,
                 drive::addVisionMeasurementAutoAlign,
+                drive::getAutoAlignPose,
+                () -> drive.getChassisSpeeds().omegaRadiansPerSecond,
                 new VisionIOLimelight(backCamera, drive::getRotation),
                 new VisionIOLimelight(rightCamera, drive::getRotation),
                 new VisionIOLimelight(leftCamera, drive::getRotation)
@@ -247,6 +249,8 @@ public class RobotContainer {
             new AprilTagVision(
                 drive::setPose,
                 drive::addVisionMeasurementAutoAlign,
+                drive::getAutoAlignPose,
+                () -> drive.getChassisSpeeds().omegaRadiansPerSecond,
                 new VisionIOPhotonVisionSim(backCamera, robotToBackCamera, drive::getPose),
                 new VisionIOPhotonVisionSim(rightCamera, robotToRightCamera, drive::getPose),
                 new VisionIOPhotonVisionSim(leftCamera, robotToLeftCamera, drive::getPose));
@@ -279,6 +283,8 @@ public class RobotContainer {
             new AprilTagVision(
                 drive::setPose,
                 drive::addVisionMeasurementAutoAlign,
+                drive::getAutoAlignPose,
+                () -> drive.getChassisSpeeds().omegaRadiansPerSecond,
                 new VisionIO() {},
                 new VisionIO() {});
         aimingService = new AimingService(drive::getLatestSnapshot);

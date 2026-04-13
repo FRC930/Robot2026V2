@@ -18,6 +18,7 @@ import frc.robot.subsystems.vision.VisionIO.PoseObservation;
 import frc.robot.subsystems.vision.VisionIO.PoseObservationType;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import org.littletonrobotics.junction.Logger;
 
 public class AprilTagVision extends Vision {
@@ -34,8 +35,13 @@ public class AprilTagVision extends Vision {
   private boolean m_isFirstTime = true;
 
   // resets the aprilTag vision to nothing
-  public AprilTagVision(Consumer<Pose2d> resetPose, VisionConsumer consumer, VisionIO... io) {
-    super(consumer, io);
+  public AprilTagVision(
+      Consumer<Pose2d> resetPose,
+      VisionConsumer consumer,
+      Supplier<Pose2d> poseSupplier,
+      Supplier<Double> angularVelocitySupplier,
+      VisionIO... io) {
+    super(consumer, poseSupplier, angularVelocitySupplier, io);
     m_ResetPose = resetPose;
 
     // try {

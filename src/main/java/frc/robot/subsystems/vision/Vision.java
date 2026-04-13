@@ -19,11 +19,13 @@ import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.vision.VisionIO.PoseObservation;
 import frc.robot.subsystems.vision.VisionIO.PoseObservationType;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Supplier;
 import org.littletonrobotics.junction.Logger;
 
 public class Vision extends SubsystemBase {
@@ -31,9 +33,17 @@ public class Vision extends SubsystemBase {
   private final VisionIO[] io;
   private final VisionIOInputsAutoLogged[] inputs;
   private final Alert[] disconnectedAlerts;
+  private final Supplier<Pose2d> poseSupplier;
+  private final Supplier<Double> angularVelocitySupplier;
 
-  public Vision(VisionConsumer consumer, VisionIO... io) {
+  public Vision(
+      VisionConsumer consumer,
+      Supplier<Pose2d> poseSupplier,
+      Supplier<Double> angularVelocitySupplier,
+      VisionIO... io) {
     this.consumer = consumer;
+    this.poseSupplier = poseSupplier;
+    this.angularVelocitySupplier = angularVelocitySupplier;
     this.io = io;
 
     // Initialize inputs
@@ -98,19 +108,48 @@ public class Vision extends SubsystemBase {
         // Check whether to reject pose
         boolean rejectPose = false;
         if (!isQuestPose) {
-          rejectPose =
-              rejectPose(observation)
-                  || observation.tagCount() == 0 // Must have at least one tag
-                  || (observation.tagCount() == 1)
-                  // && observation.ambiguity() > maxAmbiguity) // Cannot be high ambiguity
-                  || Math.abs(observation.pose().getZ())
-                      > maxZError // Must have realistic Z coordinate
+          // Subclass rejection (e.g. AprilTagVision rejects MT1 during auto)
+          rejectPose = rejectPose(observation);
 
-                  // Must be within the field boundaries
+          // Must have at least one tag
+          rejectPose = rejectPose || observation.tagCount() == 0;
+
+          // Reject single-tag with high ambiguity
+          rejectPose =
+              rejectPose || (observation.tagCount() == 1 && observation.ambiguity() > maxAmbiguity);
+
+          // Must have realistic Z coordinate
+          rejectPose = rejectPose || Math.abs(observation.pose().getZ()) > maxZError;
+
+          // Must be within the field boundaries
+          rejectPose =
+              rejectPose
                   || observation.pose().getX() < 0.0
                   || observation.pose().getX() > aprilTagLayout.getFieldLength()
                   || observation.pose().getY() < 0.0
                   || observation.pose().getY() > aprilTagLayout.getFieldWidth();
+
+          // Reject stale observations
+          double latency = Timer.getFPGATimestamp() - observation.timestamp();
+          rejectPose = rejectPose || latency > maxLatencySeconds;
+
+          // Reject during fast rotation
+          rejectPose =
+              rejectPose || Math.abs(angularVelocitySupplier.get()) > maxAngularVelocityRadPerSec;
+
+          // Reject if vision pose is too far from current estimate
+          double poseDelta =
+              poseSupplier
+                  .get()
+                  .getTranslation()
+                  .getDistance(observation.pose().toPose2d().getTranslation());
+          rejectPose = rejectPose || poseDelta > maxPoseDeltaMeters;
+
+          // Reject distant single-tag observations
+          rejectPose =
+              rejectPose
+                  || (observation.tagCount() == 1
+                      && observation.averageTagDistance() > maxTagDistanceMeters);
         } else {
           rejectPose =
               // Must be within the field boundaries
