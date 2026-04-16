@@ -8,4 +8,7 @@ public interface AimingEvents {
   Trigger isAimingAtPassLow();
 
   Trigger isAimingAtPassHigh();
+
+  /** Fires when the robot heading is within tolerance of the commanded aim angle. */
+  Trigger isOnTarget();
 }

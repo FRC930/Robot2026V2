@@ -20,6 +20,7 @@ public class IndexerBehavior extends SubsystemBehavior {
         .goals()
         .isShootingTrigger()
         .and(events.shooter().isSpunUp())
+        .and(events.aiming().isOnTarget())
         .whileTrue(indexer.indexingCommand())
         .whileFalse(indexer.idleCommand());
 

@@ -57,6 +57,13 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
   private static final LoggedTunableNumber positiveAimingCompensation =
       new LoggedTunableNumber("Aiming/positiveAimingCompensation", 30.00);
 
+  // Tolerance (degrees) for isOnTarget(): how close robot heading must be to aim angle.
+  private static final LoggedTunableNumber onTargetToleranceDeg =
+      new LoggedTunableNumber("Aiming/onTargetToleranceDeg", 5.0);
+  // Debounce (seconds) to avoid flickering when crossing the threshold.
+  private static final LoggedTunableNumber onTargetDebounce =
+      new LoggedTunableNumber("Aiming/onTargetDebounce", 0.08);
+
   // EMA state (only written by AimingThread, no synchronization needed)
   private double smoothedRPM = 0.0;
   private double smoothedAimDeg = 0.0;
@@ -87,6 +94,18 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
   @Override
   public Trigger isAimingAtPassHigh() {
     return targetState.is(AimingTarget.PASS_HIGH);
+  }
+
+  @Override
+  public Trigger isOnTarget() {
+    return new Trigger(() -> Math.abs(getHeadingErrorDeg()) <= onTargetToleranceDeg.get())
+        .debounce(onTargetDebounce.get());
+  }
+
+  /** Wrapped signed error (degrees) between current heading and commanded aim angle. */
+  private double getHeadingErrorDeg() {
+    double headingDeg = snapshotSupplier.get().heading().getDegrees();
+    return Math.toDegrees(MathUtil.angleModulus(Math.toRadians(headingDeg - aimAngleDeg)));
   }
 
   /** Called at 250Hz by AimingThread. Reads snapshot, extrapolates pose, computes solution. */
@@ -300,6 +319,7 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
     PoseSnapshot snapshot = snapshotSupplier.get();
     Logger.recordOutput("Aiming/RobotPose", snapshot.pose());
     Logger.recordOutput("Aiming/TargetPosition", getTargetPosition());
+    Logger.recordOutput("Aiming/HeadingErrorDeg", getHeadingErrorDeg());
   }
 
   public double getAimAngleDeg() {
