@@ -6,8 +6,6 @@ import static edu.wpi.first.units.Units.Radians;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.IntakeIOSim;
 import java.util.ArrayList;
@@ -88,13 +86,7 @@ public class BallTrajectorySim {
       activeBalls.remove(0);
     }
 
-    double shooterLaunchAngle = 0.0;
-    boolean isBlue = DriverStation.getAlliance().orElse(Alliance.Red) == Alliance.Blue;
-    if (isBlue) {
-      shooterLaunchAngle = launchAngleRad;
-    } else {
-      shooterLaunchAngle = ((Math.PI) - launchAngleRad);
-    }
+    double shooterLaunchAngle = ((Math.PI) - 1.117011);
 
     // Launching Ball 1
     SimulatedArena.getInstance()
@@ -106,7 +98,7 @@ public class BallTrajectorySim {
                 RobotContainer.driveSimulation.getSimulatedDriveTrainPose().getRotation(),
                 Inches.of(20),
                 MetersPerSecond.of(ballSpeed),
-                Radians.of(shooterLaunchAngle)));
+                Radians.of((shooterLaunchAngle))));
 
     // Launching Ball 2
     SimulatedArena.getInstance()

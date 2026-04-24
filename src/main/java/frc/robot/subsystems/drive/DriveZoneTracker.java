@@ -72,6 +72,6 @@ public class DriveZoneTracker extends VirtualSubsystem implements DriveEvents {
 
   @Override
   public Trigger isInOpponentZone() {
-    return inNeutralZoneTrigger;
+    return inOpponentTrigger;
   }
 }
