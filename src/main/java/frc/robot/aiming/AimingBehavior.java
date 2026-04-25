@@ -1,5 +1,7 @@
 package frc.robot.aiming;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.util.AllEvents;
@@ -16,19 +18,27 @@ public class AimingBehavior extends SubsystemBehavior {
   @Override
   public void configure(AllEvents events) {
     Trigger inNeutralZone = events.drive().isInNeutralZone();
+    Trigger inRedZone = events.drive().isInRedZone();
+    Trigger inBlueZone = events.drive().isInBlueZone();
     Trigger onUpperHalf = events.drive().isOnUpperFieldHalf();
+    Trigger isPlayingBlue =
+        new Trigger(() -> (DriverStation.getAlliance().orElse(Alliance.Red) == Alliance.Blue));
+    Trigger inOurSide =
+        inNeutralZone
+            .negate()
+            .and(isPlayingBlue.and(inBlueZone).or(isPlayingBlue.negate().and(inRedZone)));
 
     // Aim at hub when outside the neutral zone
-    inNeutralZone
-        .negate()
-        .onTrue(Commands.runOnce(() -> aimingService.setTarget(AimingTarget.HUB)));
+    inOurSide.onTrue(Commands.runOnce(() -> aimingService.setTarget(AimingTarget.HUB)));
 
     // In neutral zone, pass to appropriate zone based on field half
-    inNeutralZone
+    inOurSide
+        .negate()
         .and(onUpperHalf.negate())
         .onTrue(Commands.runOnce(() -> aimingService.setTarget(AimingTarget.PASS_LOW)));
 
-    inNeutralZone
+    inOurSide
+        .negate()
         .and(onUpperHalf)
         .onTrue(Commands.runOnce(() -> aimingService.setTarget(AimingTarget.PASS_HIGH)));
   }
