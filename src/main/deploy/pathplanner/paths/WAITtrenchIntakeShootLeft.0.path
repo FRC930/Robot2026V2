@@ -3,42 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.45,
-        "y": 0.680192771084337
+        "x": 3.55,
+        "y": 7.389807228915663
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.012433734939759,
-        "y": 0.691120481927711
+        "x": 7.6559353591255155,
+        "y": 7.35376604850214
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.83289156626506,
-        "y": 3.445
+        "x": 7.833,
+        "y": 4.527
       },
       "prevControl": {
-        "x": 7.83289156626506,
-        "y": 0.4945180722891558
+        "x": 7.9158434072728046,
+        "y": 7.401420345744888
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "trenchIntakeShootRight.0"
+      "linkedName": "trenchIntakeShootLeft.0"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.8784648187633219,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": -90.0
     }
   ],
   "constraintZones": [
     {
-      "name": "Intaking",
-      "minWaypointRelativePos": 0.7057071960297804,
-      "maxWaypointRelativePos": 0.9924460431654547,
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.7,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 2.0,
         "maxAcceleration": 3.0,
@@ -53,7 +53,7 @@
   "eventMarkers": [
     {
       "name": "Intaking",
-      "waypointRelativePos": 0.0917266187050369,
+      "waypointRelativePos": 0.1,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -76,9 +76,9 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": "TrenchIntakeShootRight",
+  "folder": "WAITtrenchIntakeShootLeft",
   "idealStartingState": {
-    "velocity": 0.0,
+    "velocity": 0,
     "rotation": 0.0
   },
   "useDefaultConstraints": false

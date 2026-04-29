@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.83289156626506,
-        "y": 4.526746987951808
+        "x": 7.833,
+        "y": 4.527
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.786348382952985,
-        "y": 3.390183025565454
+        "x": 7.7864568166879256,
+        "y": 3.3904360376136466
       },
       "isLocked": false,
       "linkedName": "trenchIntakeShootLeft.0"

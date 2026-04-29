@@ -8,7 +8,9 @@
     "IntakeShootRightLine",
     "MidleDepo",
     "TrenchIntakeShootLeft",
-    "TrenchIntakeShootRight"
+    "TrenchIntakeShootRight",
+    "WAITtrenchIntakeShootLeft",
+    "WAITtrenchIntakeShootRight"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,

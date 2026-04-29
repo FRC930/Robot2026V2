@@ -6,7 +6,9 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.FlippingUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.aiming.AimingService;
 import frc.robot.commands.DriveCommands;
 import frc.robot.goals.RobotGoal;
@@ -27,8 +29,12 @@ public class AutoCommandManager {
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
   private Drive m_drive;
+  private final String autoWaitKey = "AutoWait";
+
+  public static double autoWaitTime = 0.0;
 
   public AutoCommandManager(Drive drive, RobotGoals goals, AimingService aimingService) {
+    SmartDashboard.putNumber(autoWaitKey, autoWaitTime);
     configureNamedCommands(drive, goals, aimingService);
 
     // Set up auto routines
@@ -64,6 +70,10 @@ public class AutoCommandManager {
     return getAutoWithCurrentPose();
   }
 
+  public Command elasticWaitCommand() {
+    return new WaitCommand(SmartDashboard.getNumber("AutoWait", 0.0));
+  }
+
   private void configureNamedCommands(Drive drive, RobotGoals goals, AimingService AimingService) {
     NamedCommands.registerCommand("Intaking", goals.setGoalCommand(RobotGoal.INTAKING));
     NamedCommands.registerCommand(
@@ -74,6 +84,7 @@ public class AutoCommandManager {
     NamedCommands.registerCommand("Outtaking", goals.setGoalCommand(RobotGoal.OUTTAKING));
     // TODO: Make only the intake retract
     NamedCommands.registerCommand("Idle", goals.setGoalCommand(RobotGoal.IDLE));
+    NamedCommands.registerCommand("WaitTime", elasticWaitCommand());
     NamedCommands.registerCommand("SyncOdometry", DriveCommands.syncOdometry(drive));
     // NamedCommands.registerCommand(
     // "AutoAim", DriveCommands.joystickDrive(drive, AimingService).withTimeout(1.0));

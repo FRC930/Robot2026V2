@@ -1,0 +1,109 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "WaitTime"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITtrenchIntakeShootRight.0"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "trenchIntakeShootRight.1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoAim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "trenchIntakeShootRight.2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "trenchIntakeShootRight.3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "trenchIntakeShootRight.4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoAim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

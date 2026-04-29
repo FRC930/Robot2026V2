@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.45,
+        "x": 3.55,
         "y": 0.680192771084337
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.012433734939759,
+        "x": 7.112433734939758,
         "y": 0.691120481927711
       },
       "isLocked": false,
@@ -76,7 +76,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": "TrenchIntakeShootRight",
+  "folder": "WAITtrenchIntakeShootRight",
   "idealStartingState": {
     "velocity": 0.0,
     "rotation": 0.0

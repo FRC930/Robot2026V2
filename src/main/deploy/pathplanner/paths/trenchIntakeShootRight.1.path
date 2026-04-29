@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 7.83289156626506,
-        "y": 3.4449036144578313
+        "y": 3.445
       },
       "prevControl": null,
       "nextControl": {
         "x": 6.74012048192771,
-        "y": 3.9257228915662647
+        "y": 3.9258192771084333
       },
       "isLocked": false,
       "linkedName": "trenchIntakeShootRight.0"
