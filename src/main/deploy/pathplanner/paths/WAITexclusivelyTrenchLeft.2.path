@@ -12,7 +12,7 @@
         "y": 7.3968333333333325
       },
       "isLocked": false,
-      "linkedName": "WAITexclusiveleyTrenchLeft.1"
+      "linkedName": "WAITexclusivelyTrenchLeft.1"
     },
     {
       "anchor": {
@@ -41,10 +41,15 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "WAITexclusiveleyTrenchLeft.2"
+      "linkedName": "WAITexclusivelyTrenchLeft.2"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.9401459854014566,
+      "rotationDegrees": 90.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -58,10 +63,10 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 90.0
+    "rotation": 136.22145158766742
   },
   "reversed": false,
-  "folder": "WAITexclusiveTrenchLeft",
+  "folder": "WAITexclusivelyTrenchLeft",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 90.0

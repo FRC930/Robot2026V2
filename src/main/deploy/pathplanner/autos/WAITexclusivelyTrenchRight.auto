@@ -13,7 +13,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "WAITtrenchSwipeShootLeft.0"
+            "pathName": "WAITexclusivelyTrenchRight.0"
           }
         },
         {
@@ -25,25 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "WAITtrenchSwipeShootLeft.1"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SyncOdometry"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutoAim"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shooting"
+            "pathName": "WAITexclusivelyTrenchRight.1"
           }
         },
         {
@@ -55,19 +37,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "WAITtrenchSwipeShootLeft.2"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "WAITtrenchSwipeShootLeft.3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "WAITtrenchSwipeShootLeft.4"
+            "pathName": "WAITexclusivelyTrenchRight.2"
           }
         },
         {
@@ -86,12 +56,6 @@
           "type": "named",
           "data": {
             "name": "Shooting"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.0
           }
         },
         {

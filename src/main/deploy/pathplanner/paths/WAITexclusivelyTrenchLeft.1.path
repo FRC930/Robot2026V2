@@ -12,7 +12,7 @@
         "y": 6.724466666666667
       },
       "isLocked": false,
-      "linkedName": "WAITexclusiveleyTrenchLeft.0"
+      "linkedName": "WAITexclusivelyTrenchLeft.0"
     },
     {
       "anchor": {
@@ -57,7 +57,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "WAITexclusiveleyTrenchLeft.1"
+      "linkedName": "WAITexclusivelyTrenchLeft.1"
     }
   ],
   "rotationTargets": [
@@ -109,11 +109,11 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 1.8,
     "rotation": 90.0
   },
   "reversed": false,
-  "folder": "WAITexclusiveTrenchLeft",
+  "folder": "WAITexclusivelyTrenchLeft",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -90.0

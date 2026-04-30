@@ -1,0 +1,61 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "WaitTime"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITtrenchSwipeShootRight.0"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITtrenchSwipeShootRight.1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoAim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "WAIT autos",
+  "choreoAuto": false
+}

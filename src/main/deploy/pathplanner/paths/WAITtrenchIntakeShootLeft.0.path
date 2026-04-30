@@ -30,7 +30,11 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.11094890510949056,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0.8145985401459829,
       "rotationDegrees": -90.0
     }
   ],
