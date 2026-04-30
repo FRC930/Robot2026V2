@@ -76,10 +76,10 @@ public final class AimingConstants {
 
     // Pass target: distance (m) → shooter RPM
     PASS_RPM_MAP.put(Units.feetToMeters(10), 2300.0);
-    PASS_RPM_MAP.put(Units.feetToMeters(15), 2300.0);
-    PASS_RPM_MAP.put(Units.feetToMeters(20), 2300.0);
-    PASS_RPM_MAP.put(Units.feetToMeters(25), 2300.0);
-    PASS_RPM_MAP.put(Units.feetToMeters(30), 2300.0);
+    PASS_RPM_MAP.put(Units.feetToMeters(15), 2350.0);
+    PASS_RPM_MAP.put(Units.feetToMeters(20), 2400.0);
+    PASS_RPM_MAP.put(Units.feetToMeters(25), 2450.0);
+    PASS_RPM_MAP.put(Units.feetToMeters(30), 2500.0);
   }
 
   // ===== PASS TARGET POSITIONS =====
