@@ -13,7 +13,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "WAITexclusiveleyTrenchLeft.0"
+            "pathName": "WAITexclusivelyTrenchLeft.0"
           }
         },
         {
@@ -25,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "WAITexclusiveleyTrenchLeft.1"
+            "pathName": "WAITexclusivelyTrenchLeft.1"
           }
         },
         {
@@ -37,7 +37,55 @@
         {
           "type": "path",
           "data": {
-            "pathName": "WAITexclusiveleyTrenchLeft.2"
+            "pathName": "WAITexclusivelyTrenchLeft.2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoAim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITexclusivelyTrenchLeft.3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITexclusivelyTrenchLeft.4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITexclusivelyTrenchLeft.5"
           }
         },
         {
@@ -74,6 +122,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "WAIT autos",
   "choreoAuto": false
 }
