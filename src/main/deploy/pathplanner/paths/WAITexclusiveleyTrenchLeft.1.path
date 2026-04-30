@@ -1,0 +1,122 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 6.330855555555555,
+        "y": 7.426066666666667
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.399066666666666,
+        "y": 6.724466666666667
+      },
+      "isLocked": false,
+      "linkedName": "WAITexclusiveleyTrenchLeft.0"
+    },
+    {
+      "anchor": {
+        "x": 6.330855555555555,
+        "y": 4.8340444444444435
+      },
+      "prevControl": {
+        "x": 6.233411111111111,
+        "y": 5.652577777777777
+      },
+      "nextControl": {
+        "x": 6.421267295342565,
+        "y": 4.074585830233557
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.279744444444445,
+        "y": 4.960722222222222
+      },
+      "prevControl": {
+        "x": 8.27,
+        "y": 4.034999999999999
+      },
+      "nextControl": {
+        "x": 8.28840456079088,
+        "y": 5.783433275133508
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.285811111111112,
+        "y": 7.426066666666667
+      },
+      "prevControl": {
+        "x": 8.133577777777782,
+        "y": 7.104500000000001
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "WAITexclusiveleyTrenchLeft.1"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7795620437956108,
+      "rotationDegrees": -90.0
+    },
+    {
+      "waypointRelativePos": 1.1693430656934212,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 1.8700729927007353,
+      "rotationDegrees": 90.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intaking",
+      "waypointRelativePos": 0.2660980810234411,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Intaking"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 2.0673773987206845,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 90.0
+  },
+  "reversed": false,
+  "folder": "WAITexclusiveTrenchLeft",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -90.0
+  },
+  "useDefaultConstraints": true
+}

@@ -9,7 +9,7 @@
       "prevControl": null,
       "nextControl": {
         "x": 6.74012048192771,
-        "y": 3.9258192771084333
+        "y": 3.9258192771084337
       },
       "isLocked": false,
       "linkedName": "trenchIntakeShootRight.0"
@@ -50,7 +50,7 @@
       "rotationDegrees": 180.0
     },
     {
-      "waypointRelativePos": 1.1,
+      "waypointRelativePos": 0.945985401459858,
       "rotationDegrees": 90.0
     },
     {
@@ -61,8 +61,8 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.6,
-      "maxWaypointRelativePos": 1.9,
+      "minWaypointRelativePos": 1.4021321961620468,
+      "maxWaypointRelativePos": 1.886567164179105,
       "constraints": {
         "maxVelocity": 3.0,
         "maxAcceleration": 3.0,

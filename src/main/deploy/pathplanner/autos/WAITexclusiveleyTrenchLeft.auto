@@ -5,21 +5,51 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "middleDepo.0"
+            "name": "WaitTime"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "middleDepo.1"
+            "pathName": "WAITexclusiveleyTrenchLeft.0"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITexclusiveleyTrenchLeft.1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITexclusiveleyTrenchLeft.2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoAim"
           }
         },
         {
@@ -38,12 +68,6 @@
           "type": "named",
           "data": {
             "name": "Idle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "middleDepo.2"
           }
         }
       ]
