@@ -73,7 +73,7 @@
   },
   "goalEndState": {
     "velocity": 1.8,
-    "rotation": 180.0
+    "rotation": 135.0
   },
   "reversed": false,
   "folder": "WAITtrenchIntakeShootRight",

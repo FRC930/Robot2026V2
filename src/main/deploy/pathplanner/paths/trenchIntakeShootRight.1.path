@@ -16,28 +16,28 @@
     },
     {
       "anchor": {
-        "x": 5.986108433734939,
-        "y": 2.6581084337349408
+        "x": 5.997036144578313,
+        "y": 2.822024096385543
       },
       "prevControl": {
-        "x": 6.444279311404568,
-        "y": 3.0588219588888514
+        "x": 6.455207022247942,
+        "y": 3.2227376215394536
       },
       "nextControl": {
-        "x": 5.527937556065311,
-        "y": 2.25739490858103
+        "x": 5.538865266908685,
+        "y": 2.4213105712316323
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.1078333333333332,
-        "y": 2.4661444444444443
+        "x": 1.9647108433734939,
+        "y": 2.516048192771084
       },
       "prevControl": {
-        "x": 4.069829616284073,
-        "y": 2.4708369689247913
+        "x": 3.7787108433734917,
+        "y": 2.701819277108432
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,26 +46,22 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.6908315565031994,
+      "waypointRelativePos": 0.5029045643153579,
       "rotationDegrees": 180.0
     },
     {
-      "waypointRelativePos": 0.945985401459858,
-      "rotationDegrees": 90.0
-    },
-    {
-      "waypointRelativePos": 1.9,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 1.91,
+      "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.0848614072494687,
+      "minWaypointRelativePos": 1.2526054590570601,
       "maxWaypointRelativePos": 1.886567164179105,
       "constraints": {
         "maxVelocity": 3.0,
-        "maxAcceleration": 3.0,
+        "maxAcceleration": 9.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -77,7 +73,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.2,
-    "maxAcceleration": 1.5,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -91,7 +87,7 @@
   "folder": "TrenchIntakeShootRight",
   "idealStartingState": {
     "velocity": 2.5,
-    "rotation": 180.0
+    "rotation": 135.0
   },
   "useDefaultConstraints": false
 }
