@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 7.833,
-        "y": 4.527
+        "x": 7.636192771084337,
+        "y": 4.537674698795181
       },
       "prevControl": {
-        "x": 7.915850458036086,
-        "y": 7.401420142526826
+        "x": 7.719043229120423,
+        "y": 7.4120948413220065
       },
       "nextControl": null,
       "isLocked": false,
@@ -73,7 +73,7 @@
   },
   "goalEndState": {
     "velocity": 1.8,
-    "rotation": 180.0
+    "rotation": -135.0
   },
   "reversed": false,
   "folder": "WAITtrenchIntakeShootLeft",

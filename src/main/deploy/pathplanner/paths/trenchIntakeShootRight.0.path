@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.012433734939759,
-        "y": 0.691120481927711
+        "x": 6.587132530120481,
+        "y": 0.6583373493975899
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 3.445
       },
       "prevControl": {
-        "x": 7.83289156626506,
-        "y": 0.4945180722891558
+        "x": 7.17722891566265,
+        "y": 0.6255542168674695
       },
       "nextControl": null,
       "isLocked": false,
@@ -73,7 +73,7 @@
   },
   "goalEndState": {
     "velocity": 1.8,
-    "rotation": 180.0
+    "rotation": 135.0
   },
   "reversed": false,
   "folder": "TrenchIntakeShootRight",
