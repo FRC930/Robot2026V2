@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.627966666666667,
-        "y": 5.59411111111111
+        "x": 2.1602333333333332,
+        "y": 5.467433333333333
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.627966666666667,
-        "y": 6.588044444444445
+        "x": 2.1602333333333332,
+        "y": 6.461366666666668
       },
       "isLocked": false,
       "linkedName": "WAITtrenchSwipeShootLeft.1"
