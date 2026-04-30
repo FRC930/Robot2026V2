@@ -8,9 +8,9 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.aiming.AimingService;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.ElasticWaitCommand;
 import frc.robot.goals.RobotGoal;
 import frc.robot.goals.RobotGoals;
 import frc.robot.subsystems.drive.Drive;
@@ -70,10 +70,6 @@ public class AutoCommandManager {
     return getAutoWithCurrentPose();
   }
 
-  public Command elasticWaitCommand() {
-    return new WaitCommand(SmartDashboard.getNumber("AutoWait", 0.0));
-  }
-
   private void configureNamedCommands(Drive drive, RobotGoals goals, AimingService AimingService) {
     NamedCommands.registerCommand("Intaking", goals.setGoalCommand(RobotGoal.INTAKING));
     NamedCommands.registerCommand(
@@ -84,7 +80,7 @@ public class AutoCommandManager {
     NamedCommands.registerCommand("Outtaking", goals.setGoalCommand(RobotGoal.OUTTAKING));
     // TODO: Make only the intake retract
     NamedCommands.registerCommand("Idle", goals.setGoalCommand(RobotGoal.IDLE));
-    NamedCommands.registerCommand("WaitTime", elasticWaitCommand());
+    NamedCommands.registerCommand("WaitTime", new ElasticWaitCommand());
     NamedCommands.registerCommand("SyncOdometry", DriveCommands.syncOdometry(drive));
     // NamedCommands.registerCommand(
     // "AutoAim", DriveCommands.joystickDrive(drive, AimingService).withTimeout(1.0));
