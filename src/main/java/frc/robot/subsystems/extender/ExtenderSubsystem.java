@@ -35,7 +35,7 @@ public class ExtenderSubsystem extends SubsystemBase implements ExtenderEvents {
   private static final LoggedTunableNumber extenderRetractedSetpoint =
       new LoggedTunableNumber("Extender/extenderRetractedSetpoint", 2.0);
   private static final LoggedTunableNumber extenderExtendedSetpoint =
-      new LoggedTunableNumber("Extender/extenderExtendedSetpoint", 10.0);
+      new LoggedTunableNumber("Extender/extenderExtendedSetpoint", 10.5);
   private static final LoggedTunableNumber extenderIdleSetpoint =
       new LoggedTunableNumber("Extender/extenderIdleSetpoint", 6.0);
 

@@ -55,7 +55,7 @@ public final class AimingConstants {
     HUB_HOOD_ANGLE_MAP.put(2.78, 16.5);
     HUB_HOOD_ANGLE_MAP.put(1.85, 8.0);
     HUB_HOOD_ANGLE_MAP.put(3.8, 24.0);
-    HUB_HOOD_ANGLE_MAP.put(3.18, 19.7);
+    HUB_HOOD_ANGLE_MAP.put(3.18, 20.0);
     HUB_HOOD_ANGLE_MAP.put(2.35, 12.0);
 
     // Hub target: distance (m) → shooter RPM
