@@ -10,21 +10,12 @@ import org.littletonrobotics.junction.AutoLog;
 public interface IndexerIO {
   @AutoLog
   public class IndexerInputs {
-    public MutAngularVelocity indexerVelocity;
-    public MutAngularVelocity indexerSetPoint;
-    public MutVoltage indexerVoltage;
-    public MutCurrent indexerSupplyCurrent;
-    public MutCurrent indexerTorqueCurrent;
-
     public MutAngularVelocity kickerVelocity;
     public MutAngularVelocity kickerSetPoint;
     public MutVoltage kickerVoltage;
     public MutCurrent kickerSupplyCurrent;
     public MutCurrent kickerTorqueCurrent;
   }
-
-  public default void setIndexerTarget(AngularVelocity velocity) {}
-  ;
 
   public default void setKickerTarget(AngularVelocity velocity) {}
   ;
@@ -33,9 +24,6 @@ public interface IndexerIO {
   ;
 
   public default void updateInputs(IndexerInputs inputs) {}
-  ;
-
-  public default void setIndexerGains(Gains gains) {}
   ;
 
   public default void setKickerGains(Gains gains) {}

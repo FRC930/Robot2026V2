@@ -52,18 +52,11 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
 
   public IndexerSubsystem(IndexerIO IO) {
     m_IO = IO;
-
-    m_logged.indexerVoltage = Volts.mutable(0);
-    m_logged.indexerSupplyCurrent = Amps.mutable(0);
-    m_logged.indexerTorqueCurrent = Amps.mutable(0);
-    m_logged.indexerVelocity = RPM.mutable(0);
-    m_logged.indexerSetPoint = RPM.mutable(0);
     m_logged.kickerVoltage = Volts.mutable(0);
     m_logged.kickerSupplyCurrent = Amps.mutable(0);
     m_logged.kickerTorqueCurrent = Amps.mutable(0);
     m_logged.kickerVelocity = RPM.mutable(0);
     m_logged.kickerSetPoint = RPM.mutable(0);
-    m_IO.setIndexerGains(m_indexerTunableGains.build());
     m_IO.setKickerGains(m_kickerTunableGains.build());
   }
 
@@ -83,27 +76,16 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
     IndexerState state = m_state.get();
     switch (state) {
       case IDLE:
-        resetJamDetection();
         m_IO.stop();
         break;
       case FEEDING:
-        checkForJam();
         state = m_state.get();
-        m_IO.setIndexerTarget(state.indexerVelocity());
         m_IO.setKickerTarget(state.kickerVelocity());
         break;
       case REVERSING:
-        if (m_isAutoReversing && m_autoReverseTimer.hasElapsed(m_autoReverseTimeSec.get())) {
-          m_state.set(IndexerState.FEEDING);
-          m_isAutoReversing = false;
-          m_isStalling = false;
-          state = IndexerState.FEEDING;
-        }
-        m_IO.setIndexerTarget(state.indexerVelocity());
         m_IO.setKickerTarget(state.kickerVelocity());
         break;
       case INTAKING:
-        m_IO.setIndexerTarget(state.indexerVelocity());
         m_IO.setKickerTarget(state.kickerVelocity());
         break;
       default:
@@ -114,41 +96,7 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
     Logger.recordOutput("Indexer/IsStalling", m_isStalling);
     Logger.recordOutput("Indexer/JamRetryCount", m_jamRetryCount);
 
-    m_indexerTunableGains.ifGainsHaveChanged((gains) -> m_IO.setIndexerGains(gains));
     m_kickerTunableGains.ifGainsHaveChanged((gains) -> m_IO.setKickerGains(gains));
-  }
-
-  private void checkForJam() {
-    double velocity = Math.abs(m_logged.indexerVelocity.in(RPM));
-    double current = Math.abs(m_logged.indexerTorqueCurrent.in(Amps));
-
-    boolean stalled =
-        velocity < m_jamVelocityThreshold.get() || current > m_jamCurrentThreshold.get();
-
-    if (stalled) {
-      if (!m_isStalling) {
-        m_stallTimer.restart();
-        m_isStalling = true;
-      } else if (m_stallTimer.hasElapsed(m_jamDetectionTimeSec.get())
-          && m_jamRetryCount < (int) m_maxJamRetries.get()) {
-        m_state.set(IndexerState.REVERSING);
-        m_autoReverseTimer.restart();
-        m_isAutoReversing = true;
-        m_jamRetryCount++;
-        m_isStalling = false;
-      }
-    } else {
-      m_isStalling = false;
-      m_jamRetryCount = 0;
-    }
-  }
-
-  private void resetJamDetection() {
-    m_isStalling = false;
-    m_isAutoReversing = false;
-    m_jamRetryCount = 0;
-    m_stallTimer.stop();
-    m_autoReverseTimer.stop();
   }
 
   @Override
@@ -174,7 +122,6 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
     return runOnce(
         () -> {
           m_state.set(IndexerState.FEEDING);
-          resetJamDetection();
         });
   }
 
@@ -184,14 +131,6 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
 
   public Command intakingCommand() {
     return runOnce(() -> m_state.set(IndexerState.INTAKING));
-  }
-
-  public Command getNewSetIndexerVelocityCommand(DoubleSupplier velocity) {
-    return new InstantCommand(
-        () -> {
-          m_IO.setIndexerTarget(RPM.of(velocity.getAsDouble()));
-        },
-        this);
   }
 
   public Command getNewSetKickerVelocityCommand(DoubleSupplier velocity) {

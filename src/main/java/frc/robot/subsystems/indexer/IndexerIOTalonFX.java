@@ -5,10 +5,12 @@ import static edu.wpi.first.units.Units.RPM;
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.units.measure.AngularVelocity;
 import frc.robot.util.Gains;
@@ -40,34 +42,15 @@ public class IndexerIOTalonFX implements IndexerIO {
   }
 
   private void configureTalons() {
-    TalonFXConfiguration configIndexer = new TalonFXConfiguration();
-    configIndexer.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    configIndexer.CurrentLimits.StatorCurrentLimit = 80.0;
-    configIndexer.CurrentLimits.StatorCurrentLimitEnable = true;
-    configIndexer.CurrentLimits.SupplyCurrentLimit = 30.0;
-    configIndexer.CurrentLimits.SupplyCurrentLimitEnable = true;
-    configIndexer.CurrentLimits.SupplyCurrentLowerLimit = 30.0;
-    configIndexer.CurrentLimits.SupplyCurrentLowerTime = 1.0;
-    configIndexer.TorqueCurrent.PeakForwardTorqueCurrent = 60.0;
-    configIndexer.TorqueCurrent.PeakReverseTorqueCurrent = -60.0;
-    configIndexer.Feedback.SensorToMechanismRatio = INDEXER_GEAR_RATIO;
-    configIndexer.Voltage.PeakForwardVoltage = 12.0;
-    configIndexer.Voltage.PeakReverseVoltage = -12.0;
-    configIndexer.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-    PhoenixUtil.tryUntilOk(
-        5, () -> indexerMotor.getConfigurator().apply(new TalonFXConfiguration()));
-    PhoenixUtil.tryUntilOk(5, () -> indexerMotor.getConfigurator().apply(configIndexer));
 
     TalonFXConfiguration configKicker = new TalonFXConfiguration();
     configKicker.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    configKicker.CurrentLimits.StatorCurrentLimit = 60.0;
+    configKicker.CurrentLimits.StatorCurrentLimit = 80.0;
     configKicker.CurrentLimits.StatorCurrentLimitEnable = true;
     configKicker.CurrentLimits.SupplyCurrentLimit = 30.0;
     configKicker.CurrentLimits.SupplyCurrentLimitEnable = true;
-    configKicker.CurrentLimits.SupplyCurrentLowerLimit = 25.0;
-    configKicker.CurrentLimits.SupplyCurrentLowerTime = 1.0;
-    configKicker.TorqueCurrent.PeakForwardTorqueCurrent = 60.0;
-    configKicker.TorqueCurrent.PeakReverseTorqueCurrent = -60.0;
+    configKicker.TorqueCurrent.PeakForwardTorqueCurrent = 80.0;
+    configKicker.TorqueCurrent.PeakReverseTorqueCurrent = -80.0;
     configKicker.Feedback.SensorToMechanismRatio = KICKER_GEAR_RATIO;
     configKicker.Voltage.PeakForwardVoltage = 12.0;
     configKicker.Voltage.PeakReverseVoltage = -12.0;
@@ -75,14 +58,23 @@ public class IndexerIOTalonFX implements IndexerIO {
     PhoenixUtil.tryUntilOk(
         5, () -> kickerMotor.getConfigurator().apply(new TalonFXConfiguration()));
     PhoenixUtil.tryUntilOk(5, () -> kickerMotor.getConfigurator().apply(configKicker));
-  }
 
-  @Override
-  public void setIndexerTarget(AngularVelocity velocity) {
-    if (velocity.in(RPM) != indexerSetPoint.in(RPM)) {
-      indexerMotor.setControl(indexerRequest.withVelocity(velocity));
-      indexerSetPoint = velocity;
-    }
+    TalonFXConfiguration configIndexer = new TalonFXConfiguration();
+    configIndexer.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    configIndexer.CurrentLimits.StatorCurrentLimit = 80.0;
+    configIndexer.CurrentLimits.StatorCurrentLimitEnable = true;
+    configIndexer.CurrentLimits.SupplyCurrentLimit = 30.0;
+    configIndexer.CurrentLimits.SupplyCurrentLimitEnable = true;
+    configIndexer.TorqueCurrent.PeakForwardTorqueCurrent = 80.0;
+    configIndexer.TorqueCurrent.PeakReverseTorqueCurrent = -80.0;
+    configIndexer.Feedback.SensorToMechanismRatio = KICKER_GEAR_RATIO;
+    configIndexer.Voltage.PeakForwardVoltage = 12.0;
+    configIndexer.Voltage.PeakReverseVoltage = -12.0;
+    configIndexer.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    PhoenixUtil.tryUntilOk(
+        5, () -> indexerMotor.getConfigurator().apply(new TalonFXConfiguration()));
+    PhoenixUtil.tryUntilOk(5, () -> indexerMotor.getConfigurator().apply(configIndexer));
+    indexerMotor.setControl(new Follower(kickerMotor.getDeviceID(), MotorAlignmentValue.Opposed));
   }
 
   @Override
@@ -103,12 +95,6 @@ public class IndexerIOTalonFX implements IndexerIO {
 
   @Override
   public void updateInputs(IndexerInputs inputs) {
-    inputs.indexerVelocity.mut_replace(indexerMotor.getVelocity().getValue());
-    inputs.indexerSupplyCurrent.mut_replace(indexerMotor.getSupplyCurrent().getValue());
-    inputs.indexerSetPoint.mut_replace(indexerSetPoint);
-    inputs.indexerVoltage.mut_replace(indexerMotor.getMotorVoltage().getValue());
-    inputs.indexerTorqueCurrent.mut_replace(indexerMotor.getTorqueCurrent().getValue());
-
     inputs.kickerVelocity.mut_replace(kickerMotor.getVelocity().getValue());
     inputs.kickerSupplyCurrent.mut_replace(kickerMotor.getSupplyCurrent().getValue());
     inputs.kickerSetPoint.mut_replace(kickerSetPoint);
