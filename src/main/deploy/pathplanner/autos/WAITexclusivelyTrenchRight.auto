@@ -63,6 +63,60 @@
           "data": {
             "name": "Idle"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITexclusivelyTrenchRight.3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITexclusivelyTrenchRight.4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "WAITexclusivelyTrenchRight.5"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoAim"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
         }
       ]
     }

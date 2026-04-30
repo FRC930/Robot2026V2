@@ -3,42 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.852425106990014,
-        "y": 5.632924393723252
+        "x": 2.296655555555556,
+        "y": 3.0020888888888884
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8484111111111114,
-        "y": 6.831655555555556
+        "x": 2.0920222222222224,
+        "y": 0.5464888888888888
       },
       "isLocked": false,
-      "linkedName": "WAITexclusivelyTrenchLeft.2"
+      "linkedName": "WAITexclusivelyTrenchRight.2"
     },
     {
       "anchor": {
-        "x": 4.4891555555555565,
-        "y": 7.533255555555556
+        "x": 6.291877777777778,
+        "y": 0.6244444444444435
       },
       "prevControl": {
-        "x": 3.4891555555555565,
-        "y": 7.533255555555556
+        "x": 2.852088888888889,
+        "y": 0.4880222222222216
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "WAITexclusivelyTrenchLeft.3"
+      "linkedName": "WAITexclusivelyTrenchRight.3"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.6963503649635024,
-      "rotationDegrees": -90.0
+      "waypointRelativePos": 0.6218978102189805,
+      "rotationDegrees": 90.0
     }
   ],
   "constraintZones": [
     {
       "name": "Under trench",
-      "minWaypointRelativePos": 0.7999999999999973,
-      "maxWaypointRelativePos": 1.0,
+      "minWaypointRelativePos": 0.6072494669509543,
+      "maxWaypointRelativePos": 0.8341151385927523,
       "constraints": {
         "maxVelocity": 1.0,
         "maxAcceleration": 3.0,
@@ -60,14 +60,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 1.8,
-    "rotation": -90.0
+    "velocity": 0.0,
+    "rotation": 90.0
   },
   "reversed": false,
-  "folder": "WAITexclusivelyTrenchLeft",
+  "folder": "WAITexclusivelyTrenchRight",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 136.22145158766742
+    "rotation": -148.34872711328748
   },
   "useDefaultConstraints": true
 }
