@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.509,
-        "y": 0.6244444444444435
+        "x": 0.5113253012048191,
+        "y": 6.012915662650602
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.509,
-        "y": 0.6244444444444435
+        "x": 1.7570843373493976,
+        "y": 5.9364216867469874
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "WAITdepoLeft.2"
     },
     {
       "anchor": {
-        "x": 6.213922222222224,
-        "y": 0.6244444444444435
+        "x": 2.456457831325301,
+        "y": 3.8164457831325302
       },
       "prevControl": {
-        "x": 5.213922222222224,
-        "y": 0.6244444444444436
+        "x": 2.435096385542168,
+        "y": 4.985939759036143
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "WAITexclusivelyTrenchRight.0"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -41,14 +41,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.0,
-    "rotation": 90.0
+    "velocity": 0,
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": "WAITexclusivelyTrenchRight",
+  "folder": "WAITtrenchIntakeShootLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8581555555555558,
-        "y": 5.516155555555556
+        "x": 1.9974939759036148,
+        "y": 3.8492289156626507
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8557506005537454,
-        "y": 7.66974340562986
+        "x": 1.9950890209018044,
+        "y": 6.002816765736955
       },
       "isLocked": false,
       "linkedName": "trenchIntakeShootLeft.1"
@@ -81,7 +81,7 @@
   "folder": "TrenchIntakeShootLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 135.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": false
 }

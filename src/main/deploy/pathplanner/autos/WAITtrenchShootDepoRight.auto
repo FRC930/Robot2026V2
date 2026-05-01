@@ -55,19 +55,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "trenchIntakeShootRight.2"
+            "pathName": "WAITdepoRight.2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "trenchIntakeShootRight.3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "trenchIntakeShootRight.4"
+            "pathName": "WAITdepoRight.3"
           }
         },
         {

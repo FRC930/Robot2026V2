@@ -53,21 +53,27 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "trenchIntakeShootLeft.2"
+            "name": "SyncOdometry"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "trenchIntakeShootLeft.3"
+            "pathName": "WAITdepoLeft.2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SyncOdometry"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "trenchIntakeShootLeft.4"
+            "pathName": "WAITdepoLeft.3"
           }
         },
         {

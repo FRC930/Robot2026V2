@@ -16,32 +16,48 @@
     },
     {
       "anchor": {
-        "x": 5.997036144578313,
-        "y": 2.822024096385543
+        "x": 6.445072289156626,
+        "y": 2.8001686746987957
       },
       "prevControl": {
-        "x": 6.096305278174036,
-        "y": 3.498045649072753
+        "x": 6.544341422752349,
+        "y": 3.476190227386006
       },
       "nextControl": {
-        "x": 5.908603934422876,
-        "y": 2.2198018561844224
+        "x": 6.356640079001189,
+        "y": 2.197946434497675
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.1925534950071324,
-        "y": 2.527646219686162
+        "x": 3.2323253012048188,
+        "y": 2.4176987951807236
       },
       "prevControl": {
-        "x": 3.0065534950071298,
-        "y": 2.71341730402351
+        "x": 4.177026769104578,
+        "y": 2.2672375522157404
+      },
+      "nextControl": {
+        "x": 2.2860912956757584,
+        "y": 2.5684041232079506
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.67,
+        "y": 3.849
+      },
+      "prevControl": {
+        "x": 1.9213373493975898,
+        "y": 3.2042650602409637
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "trenchIntakeShootRight.1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
@@ -50,15 +66,15 @@
       "rotationDegrees": 180.0
     },
     {
-      "waypointRelativePos": 1.91,
-      "rotationDegrees": 180.0
+      "waypointRelativePos": 2.8,
+      "rotationDegrees": 179.09877466859373
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.2526054590570601,
-      "maxWaypointRelativePos": 1.886567164179105,
+      "minWaypointRelativePos": 1.5,
+      "maxWaypointRelativePos": 2.75,
       "constraints": {
         "maxVelocity": 3.0,
         "maxAcceleration": 9.0,
@@ -70,10 +86,44 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 1.861042183622819,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 2.099255583126551,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 2.5101736972704507,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.2,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 6.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -81,7 +131,7 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": -145.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "TrenchIntakeShootRight",

@@ -32,25 +32,41 @@
     },
     {
       "anchor": {
-        "x": 1.8581555555555558,
-        "y": 5.516155555555556
+        "x": 3.276036144578313,
+        "y": 5.324469879518071
       },
       "prevControl": {
-        "x": 2.858155555555556,
-        "y": 5.516155555555556
+        "x": 3.8497386565769793,
+        "y": 5.734346351238405
+      },
+      "nextControl": {
+        "x": 2.7023336325796463,
+        "y": 4.914593407797738
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.997,
+        "y": 3.8492289156626507
+      },
+      "prevControl": {
+        "x": 2.608951807228916,
+        "y": 4.5923132530120485
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "trenchIntakeShootLeft.1"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.0307053941908717,
+      "waypointRelativePos": 1.05,
       "rotationDegrees": 180.0
     },
     {
-      "waypointRelativePos": 1.8789144050104287,
+      "waypointRelativePos": 2.75,
       "rotationDegrees": 180.0
     }
   ],
@@ -58,7 +74,7 @@
     {
       "name": "Over Bump Speed",
       "minWaypointRelativePos": 0.807940446650123,
-      "maxWaypointRelativePos": 1.7,
+      "maxWaypointRelativePos": 2.4,
       "constraints": {
         "maxVelocity": 3.0,
         "maxAcceleration": 9.0,
@@ -70,7 +86,41 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 1.819354838709669,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 2.2719602977667535,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 2.6173697270471257,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.2,
     "maxAcceleration": 3.0,
@@ -81,7 +131,7 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 135.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "TrenchIntakeShootLeft",
