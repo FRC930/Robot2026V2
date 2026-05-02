@@ -76,7 +76,7 @@ public class AutoCommandManager {
         "Shooting",
         goals
             .setGoalCommand(RobotGoal.SHOOTING)
-            .alongWith(DriveCommands.autoAimForAutoNoExit(drive, AimingService).withTimeout(2.0)));
+            .alongWith(DriveCommands.autoAimForAutoNoExit(drive, AimingService).withTimeout(3.5)));
     NamedCommands.registerCommand("Outtaking", goals.setGoalCommand(RobotGoal.OUTTAKING));
     // TODO: Make only the intake retract
     NamedCommands.registerCommand("Idle", goals.setGoalCommand(RobotGoal.IDLE));

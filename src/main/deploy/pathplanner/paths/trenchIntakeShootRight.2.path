@@ -21,7 +21,7 @@
       },
       "prevControl": {
         "x": 2.6912029987245787,
-        "y": 0.617856044560285
+        "y": 0.6178560445602851
       },
       "nextControl": {
         "x": 3.1873419370814124,
@@ -67,6 +67,39 @@
   ],
   "pointTowardsZones": [],
   "eventMarkers": [
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 0.5538461538461531,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 0.8436724565756841,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 1.8362282878411875,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
     {
       "name": "Intaking",
       "waypointRelativePos": 1.9176232275489586,
