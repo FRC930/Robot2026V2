@@ -10,14 +10,14 @@ public enum IndexerState {
   TESTING(() -> 0.0, () -> 0.0),
   IDLE(() -> 0.0, () -> 0.0),
   FEEDING(
-      new LoggedTunableNumber("Indexer/setIndexerPointShooting", 3500.0),
-      new LoggedTunableNumber("Indexer/setKickerPointShooting", 3500.0)),
+      new LoggedTunableNumber("Indexer/setIndexerPointShooting", 10.0),
+      new LoggedTunableNumber("Indexer/setKickerPointShooting", 4000.0)),
   REVERSING(
       new LoggedTunableNumber("Indexer/setIndexerPointReverse", -50),
       new LoggedTunableNumber("Indexer/setKickerPointReverse", -50)),
   INTAKING(
       new LoggedTunableNumber("Indexer/setIndexerPointIntaking", 0),
-      new LoggedTunableNumber("Indexer/setKickerPointIntaking", 0));
+      new LoggedTunableNumber("Indexer/setKickerPointIntaking", 500.0));
 
   private DoubleSupplier m_indexerVelocity;
   private DoubleSupplier m_kickerVelocity;

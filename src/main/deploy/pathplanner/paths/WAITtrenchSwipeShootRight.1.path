@@ -1,0 +1,73 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.587888888888889,
+        "y": 2.0763666666666665
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.389322222222223,
+        "y": 2.397933333333333
+      },
+      "isLocked": false,
+      "linkedName": "WAITtrenchSwipeShootRight.0"
+    },
+    {
+      "anchor": {
+        "x": 2.8326000000000007,
+        "y": 2.514866666666667
+      },
+      "prevControl": {
+        "x": 4.635322222222222,
+        "y": 2.6220555555555554
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "WAITtrenchSwipeShootRight.1"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.8978102189781003,
+      "rotationDegrees": 180.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Over Bump Speed",
+      "minWaypointRelativePos": 0.41961620469083044,
+      "maxWaypointRelativePos": 0.8938166311300609,
+      "constraints": {
+        "maxVelocity": 2.75,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -142.53944513950933
+  },
+  "reversed": false,
+  "folder": "WAITtrenchSwipeShootRight",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}

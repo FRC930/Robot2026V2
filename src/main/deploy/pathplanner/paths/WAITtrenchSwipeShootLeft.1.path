@@ -3,44 +3,44 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.45,
-        "y": 7.389807228915663
+        "x": 7.013313253012049,
+        "y": 5.237048192771084
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.067951807228916,
-        "y": 7.324240963855422
+        "x": 5.999891030789826,
+        "y": 5.227303748326641
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "WAITtrenchSwipeShootLeft.0"
     },
     {
       "anchor": {
-        "x": 7.636192771084337,
-        "y": 4.537674698795181
+        "x": 2.1602333333333332,
+        "y": 5.467433333333333
       },
       "prevControl": {
-        "x": 7.275578313253012,
-        "y": 7.127542168674699
+        "x": 3.5049666666666672,
+        "y": 5.477177777777778
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "trenchIntakeShootLeft.0"
+      "linkedName": "WAITtrenchSwipeShootLeft.1"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.8008298755186601,
-      "rotationDegrees": -90.0
+      "waypointRelativePos": 0.8602050326188257,
+      "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [
     {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7,
-      "maxWaypointRelativePos": 1.0,
+      "name": "Over Bump Speed",
+      "minWaypointRelativePos": 0.38812949640287836,
+      "maxWaypointRelativePos": 0.7866906474820087,
       "constraints": {
-        "maxVelocity": 2.0,
+        "maxVelocity": 2.75,
         "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -52,13 +52,24 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Intaking",
-      "waypointRelativePos": 0.1,
+      "name": "SyncOdometry",
+      "waypointRelativePos": 0.1107938320959458,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Intaking"
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 0.30039977155911035,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
         }
       }
     }
@@ -72,14 +83,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 1.8,
-    "rotation": -135.0
+    "velocity": 0.0,
+    "rotation": 137.021364940356
   },
   "reversed": false,
-  "folder": "TrenchIntakeShootLeft",
+  "folder": "WAITtrenchSwipeShootLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": false
 }

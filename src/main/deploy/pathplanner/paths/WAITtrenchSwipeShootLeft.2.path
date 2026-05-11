@@ -3,68 +3,56 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9974939759036148,
-        "y": 3.8492289156626507
+        "x": 2.1602333333333332,
+        "y": 5.467433333333333
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9950890209018044,
-        "y": 6.002816765736955
+        "x": 2.1602333333333332,
+        "y": 6.461366666666668
       },
       "isLocked": false,
-      "linkedName": "trenchIntakeShootLeft.1"
+      "linkedName": "WAITtrenchSwipeShootLeft.1"
     },
     {
       "anchor": {
-        "x": 2.7969472182596284,
-        "y": 7.547845934379458
+        "x": 3.6316444444444445,
+        "y": 7.445555555555555
       },
       "prevControl": {
-        "x": 2.1181151944881647,
-        "y": 7.555832193482652
+        "x": 2.3725824989131623,
+        "y": 7.379289137369697
       },
       "nextControl": {
-        "x": 3.896733238231098,
-        "y": 7.53490727532097
+        "x": 4.187077777777778,
+        "y": 7.474788888888889
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.980759036144579,
-        "y": 7.547845934379458
+        "x": 5.142033333333334,
+        "y": 7.445555555555555
       },
       "prevControl": {
-        "x": 4.172108433734939,
-        "y": 7.553722891566265
+        "x": 4.142033333333334,
+        "y": 7.445555555555555
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "trenchIntakeShootLeft.2"
+      "linkedName": "WAITtrenchSwipeShootLeft.2"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.35,
+      "waypointRelativePos": 0.6393700787401518,
       "rotationDegrees": 0.0
     }
   ],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "Intaking",
-      "waypointRelativePos": 1.7285617825793134,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Intaking"
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.2,
     "maxAcceleration": 3.0,
@@ -74,14 +62,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 3.2,
+    "velocity": 1.8,
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "TrenchIntakeShootLeft",
+  "folder": "WAITtrenchSwipeShootLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 137.021364940356
   },
   "useDefaultConstraints": false
 }

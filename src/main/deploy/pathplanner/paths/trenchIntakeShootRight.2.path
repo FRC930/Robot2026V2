@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.3581084337349396,
-        "y": 2.4941927710843377
+        "x": 1.67,
+        "y": 3.849
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.412746987951807,
-        "y": 1.0735903614457833
+        "x": 1.7246385542168672,
+        "y": 2.428397590361446
       },
       "isLocked": false,
       "linkedName": "trenchIntakeShootRight.1"
@@ -21,7 +21,7 @@
       },
       "prevControl": {
         "x": 2.6912029987245787,
-        "y": 0.6178560445602845
+        "y": 0.6178560445602851
       },
       "nextControl": {
         "x": 3.1873419370814124,
@@ -46,13 +46,60 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.05,
+      "waypointRelativePos": 0.390041493775947,
       "rotationDegrees": 0.0
     }
   ],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.3870967741935665,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 3.0,
+        "maxAcceleration": 7.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 0.5538461538461531,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 0.8436724565756841,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
+    {
+      "name": "SyncOdometry",
+      "waypointRelativePos": 1.8362282878411875,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "SyncOdometry"
+        }
+      }
+    },
     {
       "name": "Intaking",
       "waypointRelativePos": 1.9176232275489586,
@@ -81,7 +128,7 @@
   "folder": "TrenchIntakeShootRight",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -145.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": false
 }

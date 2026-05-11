@@ -55,17 +55,17 @@ public final class AimingConstants {
     HUB_HOOD_ANGLE_MAP.put(2.78, 16.5);
     HUB_HOOD_ANGLE_MAP.put(1.85, 8.0);
     HUB_HOOD_ANGLE_MAP.put(3.8, 24.0);
-    HUB_HOOD_ANGLE_MAP.put(3.18, 19.7);
+    HUB_HOOD_ANGLE_MAP.put(3.18, 20.0);
     HUB_HOOD_ANGLE_MAP.put(2.35, 12.0);
 
     // Hub target: distance (m) → shooter RPM
     // Seed values from physics model, calibrated to 1910 RPM at 7ft
     // HUB_RPM_MAP.put(Units.feetToMeters(3), 2692.0);
-    HUB_RPM_MAP.put(2.78, 1910.0);
-    HUB_RPM_MAP.put(1.85, 1910.0);
-    HUB_RPM_MAP.put(3.8, 1910.0);
-    HUB_RPM_MAP.put(3.18, 1910.0);
-    HUB_RPM_MAP.put(2.35, 1910.0);
+    HUB_RPM_MAP.put(2.78, 1895.0);
+    HUB_RPM_MAP.put(1.85, 1895.0);
+    HUB_RPM_MAP.put(3.8, 1895.0);
+    HUB_RPM_MAP.put(3.18, 1895.0);
+    HUB_RPM_MAP.put(2.35, 1895.0);
 
     // Pass target: distance (m) → hood angle (deg from horizontal)
     PASS_HOOD_ANGLE_MAP.put(Units.feetToMeters(10), 30.0);
@@ -75,22 +75,25 @@ public final class AimingConstants {
     PASS_HOOD_ANGLE_MAP.put(Units.feetToMeters(30), 30.0);
 
     // Pass target: distance (m) → shooter RPM
+    PASS_RPM_MAP.put(1.0, 1895.0);
+    PASS_RPM_MAP.put(2.0, 1895.0);
+    PASS_RPM_MAP.put(3.0, 1895.0);
     PASS_RPM_MAP.put(Units.feetToMeters(10), 2300.0);
-    PASS_RPM_MAP.put(Units.feetToMeters(15), 2300.0);
-    PASS_RPM_MAP.put(Units.feetToMeters(20), 2300.0);
-    PASS_RPM_MAP.put(Units.feetToMeters(25), 2300.0);
-    PASS_RPM_MAP.put(Units.feetToMeters(30), 2300.0);
+    PASS_RPM_MAP.put(Units.feetToMeters(15), 2350.0);
+    PASS_RPM_MAP.put(Units.feetToMeters(20), 2400.0);
+    PASS_RPM_MAP.put(Units.feetToMeters(25), 2450.0);
+    PASS_RPM_MAP.put(Units.feetToMeters(30), 2500.0);
   }
 
   // ===== PASS TARGET POSITIONS =====
   public static final Translation2d LOW_RED_PASS =
-      new Translation2d(Meters.of(15.5), Meters.of(0.9));
+      new Translation2d(Meters.of(15.5), Meters.of(1.1));
   public static final Translation2d HIGH_RED_PASS =
-      new Translation2d(Meters.of(15.5), Meters.of(7.1));
+      new Translation2d(Meters.of(15.5), Meters.of(6.9));
   public static final Translation2d LOW_BLUE_PASS =
-      new Translation2d(Meters.of(1.1), Meters.of(0.9));
+      new Translation2d(Meters.of(1.1), Meters.of(1.1));
   public static final Translation2d HIGH_BLUE_PASS =
-      new Translation2d(Meters.of(1.1), Meters.of(7.1));
+      new Translation2d(Meters.of(1.1), Meters.of(6.9));
 
   // ===== VELOCITY COMPENSATION =====
   // Minimum ball radial speed before solution is considered invalid (m/s)

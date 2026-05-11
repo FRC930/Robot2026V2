@@ -7,10 +7,18 @@
     "IntakeShootLeftLine",
     "IntakeShootRightLine",
     "MidleDepo",
+    "WAITexclusivelyTrenchRight",
     "TrenchIntakeShootLeft",
-    "TrenchIntakeShootRight"
+    "TrenchIntakeShootRight",
+    "WAITexclusivelyTrenchLeft",
+    "WAITtrenchIntakeShootLeft",
+    "WAITtrenchIntakeShootRight",
+    "WAITtrenchSwipeShootLeft",
+    "WAITtrenchSwipeShootRight"
   ],
-  "autoFolders": [],
+  "autoFolders": [
+    "WAIT autos"
+  ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,

@@ -35,11 +35,6 @@ public class IndexerIOSim implements IndexerIO {
   }
 
   @Override
-  public void setIndexerTarget(AngularVelocity velocity) {
-    this.indexerAppliedVelocity = velocity;
-  }
-
-  @Override
   public void setKickerTarget(AngularVelocity velocity) {
     this.kickerAppliedVelocity = velocity;
   }
@@ -52,9 +47,6 @@ public class IndexerIOSim implements IndexerIO {
 
   @Override
   public void updateInputs(IndexerInputs inputs) {
-    inputs.indexerSetPoint.mut_replace(this.indexerAppliedVelocity);
-    inputs.indexerVelocity.mut_replace(indexerSim.getAngularVelocity());
-    inputs.indexerVoltage.mut_replace(Volts.of(indexerSim.getInputVoltage()));
 
     inputs.kickerSetPoint.mut_replace(this.kickerAppliedVelocity);
     inputs.kickerVelocity.mut_replace(kickerSim.getAngularVelocity());

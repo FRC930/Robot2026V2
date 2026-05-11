@@ -3,44 +3,39 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.45,
-        "y": 0.680192771084337
+        "x": 2.7624337349397594,
+        "y": 3.8383012048192775
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.587132530120481,
-        "y": 0.6583373493975899
+        "x": 2.9154216867469875,
+        "y": 5.2807590361445795
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.97241084165478,
-        "y": 3.1616405135520687
+        "x": 0.5113253012048191,
+        "y": 6.012915662650602
       },
       "prevControl": {
-        "x": 7.31674819105237,
-        "y": 0.3421947304195383
+        "x": 1.3309036144578312,
+        "y": 5.958277108433736
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "trenchIntakeShootRight.0"
+      "linkedName": "WAITdepoLeft.2"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.8784648187633219,
-      "rotationDegrees": 90.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Intaking",
-      "minWaypointRelativePos": 0.7057071960297804,
-      "maxWaypointRelativePos": 0.9924460431654547,
+      "minWaypointRelativePos": 0.5111662531017411,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 2.0,
+        "maxVelocity": 1.5,
         "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -53,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "Intaking",
-      "waypointRelativePos": 0.0917266187050369,
+      "waypointRelativePos": 0.3722084367245635,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -64,7 +59,7 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.2,
+    "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -72,14 +67,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 1.8,
-    "rotation": 135.0
+    "velocity": 0,
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": "TrenchIntakeShootRight",
+  "folder": "WAITtrenchIntakeShootLeft",
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": 0.0
+    "velocity": 0,
+    "rotation": 180.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
