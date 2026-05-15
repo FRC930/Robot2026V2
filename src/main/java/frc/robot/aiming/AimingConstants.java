@@ -51,7 +51,6 @@ public final class AimingConstants {
   static {
     // Hub target: distance (m) → hood angle (deg from horizontal)
     // Seeded at 64° (known good at 7ft). Tune per-distance on robot.
-    // HUB_HOOD_ANGLE_MAP.put(Units.feetToMeters(3), 64.0);
     HUB_HOOD_ANGLE_MAP.put(2.78, 16.5);
     HUB_HOOD_ANGLE_MAP.put(1.85, 8.0);
     HUB_HOOD_ANGLE_MAP.put(3.8, 24.0);
@@ -60,7 +59,6 @@ public final class AimingConstants {
 
     // Hub target: distance (m) → shooter RPM
     // Seed values from physics model, calibrated to 1910 RPM at 7ft
-    // HUB_RPM_MAP.put(Units.feetToMeters(3), 2692.0);
     HUB_RPM_MAP.put(2.78, 1895.0);
     HUB_RPM_MAP.put(1.85, 1895.0);
     HUB_RPM_MAP.put(3.8, 1895.0);
