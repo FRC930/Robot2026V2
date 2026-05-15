@@ -4,14 +4,12 @@ import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.RPM;
 import static edu.wpi.first.units.Units.Volts;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.util.EnumState;
 import frc.robot.util.LoggedTunableGainsBuilder;
-import frc.robot.util.LoggedTunableNumber;
 import java.util.function.DoubleSupplier;
 import org.littletonrobotics.junction.Logger;
 
@@ -31,21 +29,7 @@ public class IndexerSubsystem extends SubsystemBase implements IndexerEvents {
       new LoggedTunableGainsBuilder(
           "Gains/Kicker/", 50.0, 0, 0.0, 5.7, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
-  // Jam detection tunable thresholds
-  private final LoggedTunableNumber m_jamVelocityThreshold =
-      new LoggedTunableNumber("Indexer/JamVelocityThresholdRPM", 10.0);
-  private final LoggedTunableNumber m_jamCurrentThreshold =
-      new LoggedTunableNumber("Indexer/JamCurrentThresholdAmps", 150.0);
-  private final LoggedTunableNumber m_jamDetectionTimeSec =
-      new LoggedTunableNumber("Indexer/JamDetectionTimeSec", 0.2);
-  private final LoggedTunableNumber m_autoReverseTimeSec =
-      new LoggedTunableNumber("Indexer/AutoReverseTimeSec", 0.4);
-  private final LoggedTunableNumber m_maxJamRetries =
-      new LoggedTunableNumber("Indexer/JamMaxRetries", 3);
-
   // Jam detection internal state
-  private final Timer m_stallTimer = new Timer();
-  private final Timer m_autoReverseTimer = new Timer();
   private boolean m_isStalling = false;
   private boolean m_isAutoReversing = false;
   private int m_jamRetryCount = 0;

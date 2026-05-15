@@ -30,15 +30,12 @@ public class ShooterSubsystem extends SubsystemBase implements ShooterEvents {
 
   private ShooterInputsAutoLogged logged = new ShooterInputsAutoLogged();
 
-  private final DoubleSupplier shooterRPMSupplier;
-
   public LoggedTunableGainsBuilder tunableGains =
       new LoggedTunableGainsBuilder(
           "Gains/ShooterSubsystem/", 10000.0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
-  public ShooterSubsystem(ShooterIO IO, DoubleSupplier shooterRPMSupplier) {
+  public ShooterSubsystem(ShooterIO IO) {
     m_IO = IO;
-    this.shooterRPMSupplier = shooterRPMSupplier;
     logged.shooterAngularVelocity = RPM.mutable(0);
     logged.shooterSetpoint = RPM.mutable(2700.0);
     logged.shooterSupplyCurrent = Amps.mutable(0);

@@ -52,8 +52,6 @@ public class HoodIOSim implements HoodIO {
     inputs.hoodSetAngle.mut_replace(hoodAngle);
     inputs.hoodVoltage.mut_replace(volts);
     inputs.hoodSupplyCurrent.mut_replace(hoodSim.getCurrentDrawAmps(), Amps);
-    // inputs.hoodTorqueCurrent.mut_replace();
-
   }
 
   private Voltage updateHoodPID() {

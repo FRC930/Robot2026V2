@@ -176,15 +176,13 @@ public class RobotContainer {
         intake = new IntakeSubsystem(new IntakeIOTalonFX(10, 12, upperCanbus));
         extender = new ExtenderSubsystem(new ExtenderIOTalonFX(9, 11, upperCanbus));
 
-        shooter =
-            new ShooterSubsystem(
-                new ShooterIOTalonFX(1, 2, 4, 3, upperCanbus), aimingService::getShooterRPM);
+        shooter = new ShooterSubsystem(new ShooterIOTalonFX(1, 2, 4, 3, upperCanbus));
 
         indexer = new IndexerSubsystem(new IndexerIOTalonFX(7, upperCanbus, 6));
 
         feeder = new FeederSubsystem(new FeederIOTalonFX(8, upperCanbus));
 
-        hood = new HoodSubsystem(new HoodIOTalonFX(5, upperCanbus), aimingService::getHoodAngleDeg);
+        hood = new HoodSubsystem(new HoodIOTalonFX(5, upperCanbus));
 
         // The ModuleIOTalonFXS implementation provides an example implementation for
         // TalonFXS controller connected to a CANdi with a PWM encoder. The
@@ -241,8 +239,8 @@ public class RobotContainer {
         extender = new ExtenderSubsystem(new ExtenderIOSim());
         indexer = new IndexerSubsystem(new IndexerIOSim());
         feeder = new FeederSubsystem(new FeederIOSim());
-        shooter = new ShooterSubsystem(new ShooterIOSim(), aimingService::getShooterRPM);
-        hood = new HoodSubsystem(new HoodIOSim(), aimingService::getHoodAngleDeg);
+        shooter = new ShooterSubsystem(new ShooterIOSim());
+        hood = new HoodSubsystem(new HoodIOSim());
         break;
 
       default:
@@ -267,8 +265,8 @@ public class RobotContainer {
         extender = new ExtenderSubsystem(new ExtenderIO() {});
         indexer = new IndexerSubsystem(new IndexerIO() {});
         feeder = new FeederSubsystem(new FeederIO() {});
-        shooter = new ShooterSubsystem(new ShooterIO() {}, aimingService::getShooterRPM);
-        hood = new HoodSubsystem(new HoodIO() {}, aimingService::getHoodAngleDeg);
+        shooter = new ShooterSubsystem(new ShooterIO() {});
+        hood = new HoodSubsystem(new HoodIO() {});
         break;
     }
 

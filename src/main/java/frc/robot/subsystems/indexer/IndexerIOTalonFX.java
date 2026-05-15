@@ -17,6 +17,7 @@ import frc.robot.util.Gains;
 import frc.robot.util.PhoenixUtil;
 
 public class IndexerIOTalonFX implements IndexerIO {
+  // TODO find out why the indexer stuff is not being used
 
   private VelocityTorqueCurrentFOC indexerRequest;
   private TalonFX indexerMotor;
@@ -26,7 +27,6 @@ public class IndexerIOTalonFX implements IndexerIO {
   private AngularVelocity indexerSetPoint = RPM.of(0);
   private AngularVelocity kickerSetPoint = RPM.of(0);
 
-  private static final double SENSOR_MECH_INDEXER = 1;
   private static final double KICKER_GEAR_RATIO = 24.0 / 18.0;
   private static final double INDEXER_GEAR_RATIO = 30.0 / 18.0;
 
@@ -111,15 +111,6 @@ public class IndexerIOTalonFX implements IndexerIO {
     slot0Configs.kV = gains.kV;
     slot0Configs.kA = gains.kA;
     PhoenixUtil.tryUntilOk(5, () -> indexerMotor.getConfigurator().apply(slot0Configs));
-
-    // MotionMagicConfigs motionMagicConfigs = new MotionMagicConfigs();
-    // motionMagicConfigs.MotionMagicCruiseVelocity = gains.kMMV;
-    // motionMagicConfigs.MotionMagicAcceleration = gains.kMMA;
-    // motionMagicConfigs.MotionMagicJerk = gains.kMMJ;
-    // motionMagicConfigs.MotionMagicExpo_kV = gains.kMMEV;
-    // motionMagicConfigs.MotionMagicExpo_kA = gains.kMMEA;
-    // PhoenixUtil.tryUntilOk(5, () ->
-    //   indexerMotor.getConfigurator().apply(motionMagicConfigs));
   }
 
   public void setKickerGains(Gains gains) {
@@ -133,5 +124,3 @@ public class IndexerIOTalonFX implements IndexerIO {
     PhoenixUtil.tryUntilOk(5, () -> kickerMotor.getConfigurator().apply(slot0Configs));
   }
 }
-
-// UwU

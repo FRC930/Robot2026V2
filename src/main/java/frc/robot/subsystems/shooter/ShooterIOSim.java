@@ -11,13 +11,10 @@ import frc.robot.util.Gains;
 public class ShooterIOSim implements ShooterIO {
   private AngularVelocity shooterAngularVelocity = RPM.mutable(0.0);
 
-  private ShooterInputsAutoLogged logged = new ShooterInputsAutoLogged();
-
   private final FlywheelSim shooterSim;
 
   public ShooterIOSim() {
     shooterSim =
-        // TODO shooter may not utilize flywheel, keep an eye on
         new FlywheelSim(
             LinearSystemId.createFlywheelSystem(DCMotor.getKrakenX60Foc(1), 0.0005, 1),
             DCMotor.getKrakenX60Foc(1),

@@ -206,8 +206,6 @@ public class Drive extends SubsystemBase {
                 null,
                 null,
                 null,
-                // (state) -> Logger.recordOutput("Drive/SysIdState", state.toString())),
-
                 // Log with .hoot files (MAKE SURE LOGGER IS STARTED)
                 (state) -> SignalLogger.writeString("sysid_state", state.toString())),
             new SysIdRoutine.Mechanism(

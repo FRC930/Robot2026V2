@@ -9,17 +9,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.RobotVisualization;
 import frc.robot.util.EnumState;
 import frc.robot.util.LoggedTunableGainsBuilder;
-import frc.robot.util.LoggedTunableNumber;
 import java.util.function.DoubleSupplier;
 import org.littletonrobotics.junction.Logger;
 
 public class HoodSubsystem extends SubsystemBase implements HoodEvents {
-  // Implementation goes here​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​ † ​₀
-  // ​​​​​​​​​​​ᴥ ₀​​ †
-
-  private LoggedTunableNumber aimAngle = new LoggedTunableNumber("Hood/aimAngle", 8.0);
-  private LoggedTunableNumber passAngle = new LoggedTunableNumber("Hood/passAngle", 22.5);
-
   private final HoodIO m_IO;
   private volatile boolean shouldThreadCommand = false;
 
@@ -31,11 +24,8 @@ public class HoodSubsystem extends SubsystemBase implements HoodEvents {
 
   private HoodInputsAutoLogged logged = new HoodInputsAutoLogged();
 
-  private final DoubleSupplier hoodAngleSupplier;
-
-  public HoodSubsystem(HoodIO IO, DoubleSupplier hoodAngleSupplier) {
+  public HoodSubsystem(HoodIO IO) {
     m_IO = IO;
-    this.hoodAngleSupplier = hoodAngleSupplier;
     logged.hoodAngle = Degrees.mutable(0);
     logged.hoodSetAngle = Degrees.mutable(0);
     logged.hoodVoltage = Volts.mutable(0);
