@@ -45,7 +45,6 @@ public class RobotVisualization extends VirtualSubsystem {
 
     robotBaseRoot = primaryMechanism2d.getRoot("2dBaseRoot", 225, 20);
     robotBaseRoot.append(baseLigament2d);
- 
   }
 
   public Distance getExtenderExtension() {

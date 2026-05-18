@@ -201,8 +201,7 @@ public class DriveCommands {
               } else if (forceAutoAim || useAiming) {
                 // sets the controllerAngle variable to what the aiming service says
                 // the robot should face so the shooter is aimed correctly
-                double controllerAngle =
-                    Math.toRadians(aimingService.getAimAngleDeg());
+                double controllerAngle = Math.toRadians(aimingService.getAimAngleDeg());
 
                 omega =
                     angleController.calculate(drive.getRotation().getRadians(), controllerAngle);
