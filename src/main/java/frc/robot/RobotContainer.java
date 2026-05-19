@@ -193,14 +193,7 @@ public class RobotContainer {
         // arrangements.
         // Please see the AdvantageKit template documentation for more information:
         // https://docs.advantagekit.org/getting-started/template-projects/talonfx-swerve-template#custom-module-implementations
-        //
-        // drive =
-        // new Drive(
-        // new GyroIOPigeon2(),
-        // new ModuleIOTalonFXS(TunerConstants.FrontLeft),
-        // new ModuleIOTalonFXS(TunerConstants.FrontRight),
-        // new ModuleIOTalonFXS(TunerConstants.BackLeft),
-        // new ModuleIOTalonFXS(TunerConstants.BackRight));
+
         vision =
             new AprilTagVision(
                 drive::setPose,

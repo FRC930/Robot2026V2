@@ -97,10 +97,6 @@ public class VisionIOQuest implements VisionIO {
         // Get timestamp for when the data was sent
         double timestamp = questFrame.dataTimestamp();
 
-        // if (!m_firstQuestPose) {
-        //   Logger.recordOutput("QuestPose", questPose.transformBy(ROBOT_TO_QUEST.inverse()));
-        //   m_firstQuestPose = true;
-        // }
         poseObservations.add(
             new PoseObservation(
                 // Timestamp, based on server timestamp of publish and latency
