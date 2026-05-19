@@ -17,8 +17,6 @@ import frc.robot.util.Gains;
 import frc.robot.util.PhoenixUtil;
 
 public class IndexerIOTalonFX implements IndexerIO {
-  // TODO find out why the indexer stuff is not being used
-
   private VelocityTorqueCurrentFOC indexerRequest;
   private TalonFX indexerMotor;
   private VelocityTorqueCurrentFOC kickerRequest;

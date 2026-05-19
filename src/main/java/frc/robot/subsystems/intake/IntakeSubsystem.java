@@ -32,8 +32,6 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
   private final EnumState<IntakeState> currentGoal =
       new EnumState<>("Intake/States", IntakeState.IDLE);
 
-  private boolean agitateInitialized = false;
-
   public LoggedTunableGainsBuilder rollerGains =
       new LoggedTunableGainsBuilder(
           "Gains/IntakeSubsystem/", 15.0, 0, 0.1, 3.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
@@ -131,7 +129,6 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case INTAKING:
-        agitateInitialized = false;
         m_IO.setRollerTargetSpeed(RPM.of(intakeTargetRPM.get()));
         if (Constants.currentMode == Constants.Mode.SIM) {
           if (m_IO instanceof IntakeIOSim) {
@@ -141,7 +138,6 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case OUTTAKING:
-        agitateInitialized = false;
         m_IO.setRollerTargetSpeed(RPM.of(-intakeTargetRPM.get()));
         if (Constants.currentMode == Constants.Mode.SIM) {
           AimingService.trajectorySim.setSpawnFuelOnGround(false);
@@ -162,7 +158,6 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case IDLE:
-        agitateInitialized = false;
         stop();
         if (Constants.currentMode == Constants.Mode.SIM) {
           AimingService.trajectorySim.setSpawnFuelOnGround(false);

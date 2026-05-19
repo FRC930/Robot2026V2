@@ -40,7 +40,6 @@ public class FeederSubsystem extends SubsystemBase implements FeederEvents {
     m_state.set(FeederState.TESTING);
   }
 
-  // TODO should we make a seperate stop for feeder
   public void stop() {
     m_IO.stop();
   }
