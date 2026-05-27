@@ -6,8 +6,6 @@ import static edu.wpi.first.units.Units.Radians;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.IntakeIOSim;
 import java.util.ArrayList;
@@ -24,12 +22,10 @@ import org.littletonrobotics.junction.Logger;
  */
 public class BallTrajectorySim {
 
-  private static final int SPAWN_INTERVAL_CYCLES = 4; // Spawn a ball every 4 cycles (~80ms at 50Hz)
   private static final int MAX_BALLS = 40;
   private static final double DT = 0.02; // Physics step = one robot cycle (20ms)
 
   private final ArrayList<Projectile> activeBalls = new ArrayList<>();
-  private int spawnCounter = 0;
 
   /** Publish an empty trajectory when no valid solution exists. */
   public void publishEmpty() {
@@ -72,29 +68,12 @@ public class BallTrajectorySim {
       double ballSpeed,
       Translation2d shooterVelocity) {
 
-    // Compute initial velocity in field frame
-    double vHorizontal = ballSpeed * Math.cos(launchAngleRad);
-    double vVertical = ballSpeed * Math.sin(launchAngleRad);
-    double vxLaunch = vHorizontal * Math.cos(shooterYawRad);
-    double vyLaunch = vHorizontal * Math.sin(shooterYawRad);
-
-    // Ball inherits robot base velocity
-    double vx = vxLaunch + shooterVelocity.getX();
-    double vy = vyLaunch + shooterVelocity.getY();
-    double vz = vVertical;
-
     // Cap at max balls (remove oldest)
     if (activeBalls.size() >= MAX_BALLS) {
       activeBalls.remove(0);
     }
 
-    double shooterLaunchAngle = 0.0;
-    boolean isBlue = DriverStation.getAlliance().orElse(Alliance.Red) == Alliance.Blue;
-    if (isBlue) {
-      shooterLaunchAngle = launchAngleRad;
-    } else {
-      shooterLaunchAngle = ((Math.PI) - launchAngleRad);
-    }
+    double shooterLaunchAngle = ((Math.PI) - 1.117011);
 
     // Launching Ball 1
     SimulatedArena.getInstance()
@@ -178,14 +157,5 @@ public class BallTrajectorySim {
   private static class Projectile {
     double px, py, pz;
     double vx, vy, vz;
-
-    Projectile(double px, double py, double pz, double vx, double vy, double vz) {
-      this.px = px;
-      this.py = py;
-      this.pz = pz;
-      this.vx = vx;
-      this.vy = vy;
-      this.vz = vz;
-    }
   }
 }

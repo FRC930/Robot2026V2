@@ -8,5 +8,5 @@ public interface ShooterEvents {
 
   public Trigger isShootingTrigger();
 
-  public Trigger isSpunUp(); // ;3
+  public Trigger isSpunUp();
 }

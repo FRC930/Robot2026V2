@@ -135,7 +135,7 @@ public class AimingService extends VirtualSubsystem implements AimingEvents {
         trajectorySim.simulate(
             shooterFieldPos,
             fieldAimYaw,
-            cachedLauncherAngleRad, // TODO fix on blue side
+            cachedLauncherAngleRad,
             cachedLauncherSpeed,
             shooterVelocity);
       } else {

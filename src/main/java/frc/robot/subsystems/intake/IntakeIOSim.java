@@ -14,7 +14,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,13 +28,6 @@ import org.ironmaple.simulation.seasonspecific.rebuilt2026.RebuiltFuelOnFly;
 public class IntakeIOSim implements IntakeIO {
   private final IntakeSimulation intakeSim;
 
-  // physical constants for intake extender (NOT ACCURATE)
-  private static final double kArmGearRatio = 1.0;
-  private static final double kArmLengthMeters = Units.inchesToMeters(12.0);
-  private static final double kArmMassKg = Units.lbsToKilograms(3.0);
-
-  // intake extender stow (up) angle setpoint, in radians (0 is down, positive is up)
-
   // intake Roller
   private AngularVelocity m_rollerVelocitySetPoint = RPM.mutable(0.0);
 
@@ -43,8 +35,6 @@ public class IntakeIOSim implements IntakeIO {
   private final BooleanSupplier isSolutionValid;
   private SimpleMotorFeedforward rollerFF = new SimpleMotorFeedforward(0.0, 0.002, 0.0);
   // NOTE: ProfilePID sorta worked if did not have any FF KV BUT did not reach goal
-  // private ProfiledPIDController rollerPID =
-  //     new ProfiledPIDController(0.0069, 0.0, 0.0, new Constraints(6000, 10000));
   private PIDController rollerPID = new PIDController(0.0031, 0.0, 0.0);
 
   private int counter = 0;
@@ -58,7 +48,6 @@ public class IntakeIOSim implements IntakeIO {
             DCMotor.getKrakenX60Foc(1),
             0.01);
 
-    // TODO: FINAL INTAKE SPACE CONFIGURATION FOR MAPLE-SIM
     // Here, create the intake simulation with respect to the intake on your real robot
     this.intakeSim =
         IntakeSimulation.OverTheBumperIntake(

@@ -9,7 +9,6 @@ import static edu.wpi.first.units.Units.Fahrenheit;
 import static edu.wpi.first.units.Units.RPM;
 import static edu.wpi.first.units.Units.Volts;
 
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -30,27 +29,8 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
 
   private LoggedTunableNumber intakeTargetRPM =
       new LoggedTunableNumber("Intake/intakeTargetRPM", 4000.0);
-  private LoggedTunableNumber intakeExtenderTargetAngleDown =
-      new LoggedTunableNumber("Intake/intakeExtenderTargetAngleDown", 0.0);
   private final EnumState<IntakeState> currentGoal =
       new EnumState<>("Intake/States", IntakeState.IDLE);
-
-  // Agitation tunables
-  private static final LoggedTunableNumber agitateDownAngle =
-      new LoggedTunableNumber("Intake/agitateDownAngle", 20.0);
-  private static final LoggedTunableNumber agitateUpAngle =
-      new LoggedTunableNumber("Intake/agitateUpAngle", 60.0);
-  private static final LoggedTunableNumber agitateMaxVelocity =
-      new LoggedTunableNumber("Intake/agitateMaxVelocityDegPerSec", 800.0);
-  private static final LoggedTunableNumber agitateMaxAcceleration =
-      new LoggedTunableNumber("Intake/agitateMaxAccelDegPerSec2", 1000.0);
-  private static final double AGITATE_POSITION_TOLERANCE_DEG = 2.0;
-
-  // Agitation state
-  private TrapezoidProfile agitateProfile;
-  private TrapezoidProfile.State agitateCurrentState = new TrapezoidProfile.State(0, 0);
-  private double agitateGoalPosition;
-  private boolean agitateInitialized = false;
 
   public LoggedTunableGainsBuilder rollerGains =
       new LoggedTunableGainsBuilder(
@@ -149,7 +129,6 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case INTAKING:
-        agitateInitialized = false;
         m_IO.setRollerTargetSpeed(RPM.of(intakeTargetRPM.get()));
         if (Constants.currentMode == Constants.Mode.SIM) {
           if (m_IO instanceof IntakeIOSim) {
@@ -159,7 +138,6 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case OUTTAKING:
-        agitateInitialized = false;
         m_IO.setRollerTargetSpeed(RPM.of(-intakeTargetRPM.get()));
         if (Constants.currentMode == Constants.Mode.SIM) {
           AimingService.trajectorySim.setSpawnFuelOnGround(false);
@@ -180,7 +158,6 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case IDLE:
-        agitateInitialized = false;
         stop();
         if (Constants.currentMode == Constants.Mode.SIM) {
           AimingService.trajectorySim.setSpawnFuelOnGround(false);
@@ -189,13 +166,9 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
             sim.setRunning(false);
           }
         }
-        // m_IO.setRollerTargetSpeed(RPM.of(0.0));
-        // m_IO.setExtenderTargetAngle(Degrees.of(intakeExtenderTargetAngleUp.get()));
-        // TODO add a up state for when not intaking and not outtaking
         break;
       case AGITATING:
         m_IO.stop();
-        // TODO roller agitation
         if (Constants.currentMode == Constants.Mode.SIM) {
           if (m_IO instanceof IntakeIOSim) {
             IntakeIOSim sim = (IntakeIOSim) m_IO;

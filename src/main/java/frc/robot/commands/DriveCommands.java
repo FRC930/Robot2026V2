@@ -154,8 +154,6 @@ public class DriveCommands {
               s_aimingLinedUp = false;
 
               if (s_resetPIDAndSlewLimiter) {
-                // TODO FIX go back to m_reconfigurePIDAndSlewLimiter is get ifchanged() to work
-                // if (m_reconfigurePIDAndSlewLimiter) {
                 filter.reset(m_slewRateTunableNumber.getAsDouble());
                 angleController.setD(m_kDTunableNumber.getAsDouble());
                 angleController.setP(m_kPTunableNumber.getAsDouble());
@@ -203,13 +201,10 @@ public class DriveCommands {
               } else if (forceAutoAim || useAiming) {
                 // sets the controllerAngle variable to what the aiming service says
                 // the robot should face so the shooter is aimed correctly
-                double controllerAngle =
-                    // (Math.atan2(-ySupplier.getAsDouble(), -xSupplier.getAsDouble()));
-                    Math.toRadians(aimingService.getAimAngleDeg());
+                double controllerAngle = Math.toRadians(aimingService.getAimAngleDeg());
 
                 omega =
                     angleController.calculate(drive.getRotation().getRadians(), controllerAngle);
-                // filter.calculate(controllerAngle));
                 Logger.recordOutput("DriveCommands/omega", omega);
                 Logger.recordOutput("DriveCommands/measurement", drive.getRotation().getRadians());
                 Logger.recordOutput("DriveCommands/controllerAngle", controllerAngle);
@@ -249,7 +244,6 @@ public class DriveCommands {
             })
 
         // Reset PID controller when command starts
-        // TODO determine how to reset the PIDs/Slewrate things
         .beforeStarting(() -> angleController.reset(drive.getRotation().getRadians()));
   }
 

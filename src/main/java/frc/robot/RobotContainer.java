@@ -97,9 +97,6 @@ import org.littletonrobotics.junction.Logger;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // 3D simulated visualization of 3d model
-  private RobotVisualization robotVisualization = RobotVisualization.instance();
-
   // Set to true when Testing Individual subsystems
   // This should stay false otherwise
   private static final boolean ISTESTING = false;
@@ -113,8 +110,6 @@ public class RobotContainer {
 
   private final double REG_DRIVE_SPEED = 1.0;
   private final double REG_ANGULAR_SPEED = 0.75;
-
-  private final double SLOW_DRIVE_SPEED = 0.9;
 
   private final IntakeSubsystem intake;
   private final IndexerSubsystem indexer;
@@ -162,7 +157,6 @@ public class RobotContainer {
     matchState = MatchState.getInstance();
     robotGoals = RobotGoals.getInstance();
 
-    CANBus rioCanbus = new CANBus("rio");
     CANBus upperCanbus = new CANBus("Superstructure");
     switch (Constants.currentMode) {
       case REAL:
@@ -180,25 +174,15 @@ public class RobotContainer {
         aimingService = new AimingService(drive::getLatestSnapshot);
         driveZoneTracker = new DriveZoneTracker(drive::getAutoAlignPose, drive::getChassisSpeeds);
         intake = new IntakeSubsystem(new IntakeIOTalonFX(10, 12, upperCanbus));
-        // intake = new IntakeSubsystem(new IntakeIO() {});
         extender = new ExtenderSubsystem(new ExtenderIOTalonFX(9, 11, upperCanbus));
 
-        shooter =
-            new ShooterSubsystem(
-                new ShooterIOTalonFX(1, 2, 4, 3, upperCanbus), aimingService::getShooterRPM);
-        // shooter = new ShooterSubsystem(new ShooterIO() {}, aimingService::getShooterRPM);
+        shooter = new ShooterSubsystem(new ShooterIOTalonFX(1, 2, 4, 3, upperCanbus));
 
-        indexer =
-            new IndexerSubsystem(
-                new IndexerIOTalonFX(
-                    7, upperCanbus, 6)); // TODO set this to an actual motor ID witawey
-        // indexer = new IndexerSubsystem(new IndexerIO() {});
+        indexer = new IndexerSubsystem(new IndexerIOTalonFX(7, upperCanbus, 6));
 
         feeder = new FeederSubsystem(new FeederIOTalonFX(8, upperCanbus));
 
-        hood = new HoodSubsystem(new HoodIOTalonFX(5, upperCanbus), aimingService::getHoodAngleDeg);
-        // ID
-        // hood = new HoodSubsystem(new HoodIO() {}, aimingService::getHoodAngleDeg);
+        hood = new HoodSubsystem(new HoodIOTalonFX(5, upperCanbus));
 
         // The ModuleIOTalonFXS implementation provides an example implementation for
         // TalonFXS controller connected to a CANdi with a PWM encoder. The
@@ -209,23 +193,14 @@ public class RobotContainer {
         // arrangements.
         // Please see the AdvantageKit template documentation for more information:
         // https://docs.advantagekit.org/getting-started/template-projects/talonfx-swerve-template#custom-module-implementations
-        //
-        // drive =
-        // new Drive(
-        // new GyroIOPigeon2(),
-        // new ModuleIOTalonFXS(TunerConstants.FrontLeft),
-        // new ModuleIOTalonFXS(TunerConstants.FrontRight),
-        // new ModuleIOTalonFXS(TunerConstants.BackLeft),
-        // new ModuleIOTalonFXS(TunerConstants.BackRight));
+
         vision =
             new AprilTagVision(
                 drive::setPose,
                 drive::addVisionMeasurementAutoAlign,
                 new VisionIOLimelight(backCamera, drive::getRotation),
                 new VisionIOLimelight(rightCamera, drive::getRotation),
-                new VisionIOLimelight(leftCamera, drive::getRotation)
-                // ,new VisionIOQuest(drive::getAutoAlignPose, questCamName)
-                );
+                new VisionIOLimelight(leftCamera, drive::getRotation));
 
         break;
 
@@ -257,8 +232,8 @@ public class RobotContainer {
         extender = new ExtenderSubsystem(new ExtenderIOSim());
         indexer = new IndexerSubsystem(new IndexerIOSim());
         feeder = new FeederSubsystem(new FeederIOSim());
-        shooter = new ShooterSubsystem(new ShooterIOSim(), aimingService::getShooterRPM);
-        hood = new HoodSubsystem(new HoodIOSim(), aimingService::getHoodAngleDeg);
+        shooter = new ShooterSubsystem(new ShooterIOSim());
+        hood = new HoodSubsystem(new HoodIOSim());
         break;
 
       default:
@@ -283,8 +258,8 @@ public class RobotContainer {
         extender = new ExtenderSubsystem(new ExtenderIO() {});
         indexer = new IndexerSubsystem(new IndexerIO() {});
         feeder = new FeederSubsystem(new FeederIO() {});
-        shooter = new ShooterSubsystem(new ShooterIO() {}, aimingService::getShooterRPM);
-        hood = new HoodSubsystem(new HoodIO() {}, aimingService::getHoodAngleDeg);
+        shooter = new ShooterSubsystem(new ShooterIO() {});
+        hood = new HoodSubsystem(new HoodIO() {});
         break;
     }
 
@@ -367,41 +342,7 @@ public class RobotContainer {
               aimingService);
 
       SubsystemBehavior.configureAll(robotEvents);
-
-      // This will allow us to stopwithX But then no shot on the move (given needed to have
-      // isFinish() false so does loop between stopWithX and joystick)
-      // Command stopWithX =
-      //     new FunctionalCommand(
-      //         drive::stopWithX, // init
-      //         () -> {
-      //           return;
-      //         }, // execute
-      //         (a) -> {
-      //           return;
-      //         }, // end
-      //         () -> {
-      //           return false;
-      //         }, // isFinished
-      //         drive // requirements
-      //         );
-
-      // robotGoals
-      //     .isShootingTrigger()
-      //     .and(robotEvents.drive().isNotMoving())
-      //     .and(
-      //         new Trigger(
-      //             () -> {
-      //               return DriveCommands.s_aimingLinedUp;
-      //             }))
-      //     .and(matchState.isTeleopEnabledTrigger())
-      //     .whileTrue(stopWithX);
-      //     .whileTrue(Commands.runOnce(drive::stopWithX, drive));
     }
-    // Reset gyro / odometry
-    final Runnable resetOdometry =
-        Constants.currentMode == Constants.Mode.SIM
-            ? () -> drive.setPose(driveSimulation.getSimulatedDriveTrainPose())
-            : () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d()));
 
     // Effective speed limit = min(operator slow button, goal-based limit from DriveBehavior)
     drive.setOperatorSpeedLimit(REG_DRIVE_SPEED);
@@ -426,36 +367,6 @@ public class RobotContainer {
                   DriveCommands.m_snakeModeOn = !DriveCommands.m_snakeModeOn;
                   Logger.recordOutput("Drive/snakeModeOn", DriveCommands.m_snakeModeOn);
                 }));
-
-    // Maple-Sim Button Bindings
-    // // Spawns Fuel
-    // controller
-    //     .povUp()
-    //     .onTrue(
-    //         Commands.runOnce(
-    //             () ->
-    //                 SimulatedArena.getInstance()
-    //                     .addGamePieceProjectile(
-    //                         new RebuiltFuelOnFly(
-    //                             driveSimulation.getSimulatedDriveTrainPose().getTranslation(),
-    //                             new Translation2d(0.4, 0),
-    //
-    // driveSimulation.getDriveTrainSimulatedChassisSpeedsFieldRelative(),
-    //                             driveSimulation.getSimulatedDriveTrainPose().getRotation(),
-    //                             Meters.of(1.35),
-    //                             MetersPerSecond.of(1.5),
-    //                             Degrees.of(-60)))));
-
-    // Reset gyro to 0° when B button is pressed
-    // controller
-    //     .b()
-    //     .onTrue(
-    //         Commands.runOnce(
-    //                 () ->
-    //                     drive.setPose(
-    //                         new Pose2d(drive.getPose().getTranslation(), Rotation2d.kZero)),
-    //                 drive)
-    //             .ignoringDisable(true));
   }
 
   public void configureTestButtonBindings() {
@@ -524,7 +435,6 @@ public class RobotContainer {
             new InstantCommand(
                 () -> {
                   SignalLogger.setPath("/U/logs");
-                  // SignalLogger.enableAutoLogging(true);
                   SignalLogger.start();
                   System.out.println("Started Logger");
                 }));
@@ -564,7 +474,6 @@ public class RobotContainer {
 
   public void resetSimulation() {
     if (Constants.currentMode == Constants.Mode.SIM) {
-      // drive.setPose(new Pose2d(3, 3, new Rotation2d()));
       SimulatedArena.getInstance().resetFieldForAuto();
       if (DriverStation.isDisabled()) {
         // Disable AprilTags when disabled

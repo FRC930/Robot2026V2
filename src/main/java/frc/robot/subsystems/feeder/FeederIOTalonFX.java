@@ -21,8 +21,6 @@ public class FeederIOTalonFX implements FeederIO {
 
   private AngularVelocity feederSetPoint = RPM.of(0);
 
-  private static final double SENSOR_MECH_INDEXER = 24;
-
   private final NeutralOut m_neutralOut = new NeutralOut();
 
   public FeederIOTalonFX(int feederMotorCAN, CANBus canbus) {
@@ -75,15 +73,6 @@ public class FeederIOTalonFX implements FeederIO {
     inputs.feederTorqueCurrent.mut_replace(feederMotor.getTorqueCurrent().getValue());
   }
 
-  // MotionMagicConfigs motionMagicConfigs = new MotionMagicConfigs();
-  // motionMagicConfigs.MotionMagicCruiseVelocity = gains.kMMV;
-  // motionMagicConfigs.MotionMagicAcceleration = gains.kMMA;
-  // motionMagicConfigs.MotionMagicJerk = gains.kMMJ;
-  // motionMagicConfigs.MotionMagicExpo_kV = gains.kMMEV;
-  // motionMagicConfigs.MotionMagicExpo_kA = gains.kMMEA;
-  // PhoenixUtil.tryUntilOk(5, () ->
-  //   indexerMotor.getConfigurator().apply(motionMagicConfigs));
-
   public void setFeederGains(Gains gains) {
     Slot0Configs slot0Configs = new Slot0Configs();
     slot0Configs.kP = gains.kP;
@@ -93,13 +82,5 @@ public class FeederIOTalonFX implements FeederIO {
     slot0Configs.kV = gains.kV;
     slot0Configs.kA = gains.kA;
     PhoenixUtil.tryUntilOk(5, () -> feederMotor.getConfigurator().apply(slot0Configs));
-
-    // MotionMagicConfigs motionMagicConfigs = new MotionMagicConfigs();
-    // motionMagicConfigs.MotionMagicCruiseVelocity = gains.kMMV;
-    // motionMagicConfigs.MotionMagicAcceleration = gains.kMMA;
-    // motionMagicConfigs.MotionMagicJerk = gains.kMMJ;
-    // motionMagicConfigs.MotionMagicExpo_kV = gains.kMMEV;
-    // motionMagicConfigs.MotionMagicExpo_kA = gains.kMMEA;
-    // PhoenixUtil.tryUntilOk(5, () -> feederMotor.getConfigurator().apply(motionMagicConfigs));
   }
 }

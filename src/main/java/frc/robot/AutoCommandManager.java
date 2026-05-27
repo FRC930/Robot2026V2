@@ -28,7 +28,6 @@ public class AutoCommandManager {
 
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
-  private Drive m_drive;
   private final String autoWaitKey = "AutoWait";
 
   public static double autoWaitTime = 0.0;
@@ -42,8 +41,6 @@ public class AutoCommandManager {
 
     for (String autoName : AutoBuilder.getAllAutoNames()) {
       try {
-        // Validate if path .0 exists
-        PathPlannerPath path = PathPlannerPath.fromPathFile(autoName + ".0");
         File f =
             new File(Filesystem.getDeployDirectory(), "pathplanner/autos/" + autoName + ".auto");
         JSONObject autoJson =
@@ -54,13 +51,10 @@ public class AutoCommandManager {
           autoChooser.addOption(autoName, new AutoPathCommand(autoName));
         }
       } catch (FileNotFoundException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       } catch (IOException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       } catch (ParseException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
     }
@@ -78,12 +72,9 @@ public class AutoCommandManager {
             .setGoalCommand(RobotGoal.SHOOTING)
             .alongWith(DriveCommands.autoAimForAutoNoExit(drive, AimingService).withTimeout(3.5)));
     NamedCommands.registerCommand("Outtaking", goals.setGoalCommand(RobotGoal.OUTTAKING));
-    // TODO: Make only the intake retract
     NamedCommands.registerCommand("Idle", goals.setGoalCommand(RobotGoal.IDLE));
     NamedCommands.registerCommand("WaitTime", new ElasticWaitCommand());
     NamedCommands.registerCommand("SyncOdometry", DriveCommands.syncOdometry(drive));
-    // NamedCommands.registerCommand(
-    // "AutoAim", DriveCommands.joystickDrive(drive, AimingService).withTimeout(1.0));
   }
 
   public Command getAutoWithCurrentPose() {
@@ -93,7 +84,6 @@ public class AutoCommandManager {
     if (command instanceof AutoPathCommand) {
       AutoPathCommand ppAutoCommand = (AutoPathCommand) command;
       String autoName = ppAutoCommand.m_autoName;
-      // TODO detemine if need to prepend (super class with attribute of auto name)
       returnCommand = getToPath(autoName + ".0");
       if (returnCommand != null) {
         returnCommand = returnCommand.andThen(command);

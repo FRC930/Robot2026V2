@@ -32,7 +32,6 @@ public class FeederIOSim implements FeederIO {
 
   @Override
   public void stop() {
-    // TODO should there be seperit stops for feeder and indexer
     this.feederAppliedVelocity = RPM.zero();
   }
 

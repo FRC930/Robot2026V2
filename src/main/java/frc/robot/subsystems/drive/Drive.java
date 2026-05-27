@@ -76,12 +76,10 @@ public class Drive extends SubsystemBase {
               Math.hypot(TunerConstants.BackRight.LocationX, TunerConstants.BackRight.LocationY)));
 
   // PathPlanner config constants
-  // TODO Final mass of robot
   private static final double ROBOT_MASS_KG = 61.235; // 135 lbs in kg estimate
   private static final double ROBOT_MOI = 6.883;
   private static final double WHEEL_COF = 1.2;
 
-  // TODO FINAL ROBOT CONFIGURATION FOR MAPLE-SIM
   public static final DriveTrainSimulationConfig mapleSimConfig =
       DriveTrainSimulationConfig.Default()
           .withRobotMass(Kilograms.of(ROBOT_MASS_KG))
@@ -206,8 +204,6 @@ public class Drive extends SubsystemBase {
                 null,
                 null,
                 null,
-                // (state) -> Logger.recordOutput("Drive/SysIdState", state.toString())),
-
                 // Log with .hoot files (MAKE SURE LOGGER IS STARTED)
                 (state) -> SignalLogger.writeString("sysid_state", state.toString())),
             new SysIdRoutine.Mechanism(

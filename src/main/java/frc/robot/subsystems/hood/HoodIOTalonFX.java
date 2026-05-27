@@ -88,22 +88,12 @@ public class HoodIOTalonFX implements HoodIO {
   @Override
   public void setGains(Gains gains) {
     Slot0Configs slot0Configs = new Slot0Configs();
-    // slot0Configs.GravityType = GravityTypeValue.Arm_Cosine;
     slot0Configs.kP = gains.kP;
     slot0Configs.kI = gains.kI;
     slot0Configs.kD = gains.kD;
     slot0Configs.kS = gains.kS;
-    // slot0Configs.kG = gains.kG;
     slot0Configs.kV = gains.kV;
     slot0Configs.kA = gains.kA;
     PhoenixUtil.tryUntilOk(5, () -> motor.getConfigurator().apply(slot0Configs));
-
-    // MotionMagicConfigs motionMagicConfigs = new MotionMagicConfigs();
-    // motionMagicConfigs.MotionMagicCruiseVelocity = gains.kMMV;
-    // motionMagicConfigs.MotionMagicAcceleration = gains.kMMA;
-    // motionMagicConfigs.MotionMagicJerk = gains.kMMJ;
-    // motionMagicConfigs.MotionMagicExpo_kV = gains.kMMEV;
-    // motionMagicConfigs.MotionMagicExpo_kA = gains.kMMEA;
-    // PhoenixUtil.tryUntilOk(5, () -> motor.getConfigurator().apply(motionMagicConfigs));
   }
 }
