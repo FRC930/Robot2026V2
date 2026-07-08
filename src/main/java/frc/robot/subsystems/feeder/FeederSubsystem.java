@@ -23,7 +23,7 @@ public class FeederSubsystem extends SubsystemBase implements FeederEvents {
 
   private final LoggedTunableGainsBuilder m_feederTunableGains =
       new LoggedTunableGainsBuilder(
-          "Gains/Feeder/", 17.0, 0.0, 0.000, 15.0, 0.0, 0.13, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+          "Gains/Feeder/", 1000.0, 0.0, 0.000, 15.0, 0.0, 0.13, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
   public FeederSubsystem(FeederIO IO) {
     m_IO = IO;

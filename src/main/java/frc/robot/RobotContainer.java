@@ -180,7 +180,7 @@ public class RobotContainer {
 
         indexer = new IndexerSubsystem(new IndexerIOTalonFX(7, upperCanbus, 6));
 
-        feeder = new FeederSubsystem(new FeederIOTalonFX(8, upperCanbus));
+        feeder = new FeederSubsystem(new FeederIOTalonFX(8, 13, upperCanbus));
 
         hood = new HoodSubsystem(new HoodIOTalonFX(5, upperCanbus));
 

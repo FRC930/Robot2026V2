@@ -5,10 +5,12 @@ import static edu.wpi.first.units.Units.RPM;
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.units.measure.AngularVelocity;
 import frc.robot.util.Gains;
@@ -19,35 +21,48 @@ public class FeederIOTalonFX implements FeederIO {
   private VelocityTorqueCurrentFOC feederRequest;
   private TalonFX feederMotor;
 
+  private TalonFX feederMotorFollower;
+
   private AngularVelocity feederSetPoint = RPM.of(0);
 
   private final NeutralOut m_neutralOut = new NeutralOut();
 
-  public FeederIOTalonFX(int feederMotorCAN, CANBus canbus) {
+  public FeederIOTalonFX(int feederMotorCAN, int feederMotorFollowerCAN, CANBus canbus) {
     feederMotor = new TalonFX(feederMotorCAN, canbus);
+    feederMotorFollower = new TalonFX(feederMotorFollowerCAN, canbus);
     feederRequest = new VelocityTorqueCurrentFOC(RPM.of(0.0));
 
     configureTalons();
   }
 
   private void configureTalons() {
-
     TalonFXConfiguration configFeeder = new TalonFXConfiguration();
     configFeeder.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    configFeeder.CurrentLimits.StatorCurrentLimit = 80.0;
+    configFeeder.CurrentLimits.StatorCurrentLimit = 120.0;
     configFeeder.CurrentLimits.StatorCurrentLimitEnable = true;
-    configFeeder.CurrentLimits.SupplyCurrentLimit = 35.0;
+    configFeeder.CurrentLimits.SupplyCurrentLimit = 60.0;
     configFeeder.CurrentLimits.SupplyCurrentLimitEnable = true;
-    configFeeder.CurrentLimits.SupplyCurrentLowerLimit = 30.0;
-    configFeeder.CurrentLimits.SupplyCurrentLowerTime = 1.0;
-    configFeeder.TorqueCurrent.PeakForwardTorqueCurrent = 80.0;
-    configFeeder.TorqueCurrent.PeakReverseTorqueCurrent = -80.0;
     configFeeder.Voltage.PeakForwardVoltage = 12.0;
     configFeeder.Voltage.PeakReverseVoltage = -12.0;
     configFeeder.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     PhoenixUtil.tryUntilOk(
         5, () -> feederMotor.getConfigurator().apply(new TalonFXConfiguration()));
     PhoenixUtil.tryUntilOk(5, () -> feederMotor.getConfigurator().apply(configFeeder));
+
+    TalonFXConfiguration configFollower = new TalonFXConfiguration();
+    configFollower.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    configFollower.CurrentLimits.StatorCurrentLimit = 120.0;
+    configFollower.CurrentLimits.StatorCurrentLimitEnable = true;
+    configFollower.CurrentLimits.SupplyCurrentLimit = 60.0;
+    configFollower.CurrentLimits.SupplyCurrentLimitEnable = true;
+    configFollower.Voltage.PeakForwardVoltage = 12.0;
+    configFollower.Voltage.PeakReverseVoltage = -12.0;
+    configFollower.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+    PhoenixUtil.tryUntilOk(
+        5, () -> feederMotorFollower.getConfigurator().apply(new TalonFXConfiguration()));
+    PhoenixUtil.tryUntilOk(5, () -> feederMotorFollower.getConfigurator().apply(configFollower));
+    feederMotorFollower.setControl(
+        new Follower(feederMotor.getDeviceID(), MotorAlignmentValue.Aligned));
   }
 
   @Override
