@@ -10,7 +10,6 @@ import org.littletonrobotics.junction.AutoLog;
 public interface FeederIO {
   @AutoLog
   public class FeederInputs {
-
     public MutAngularVelocity feederVelocity;
     public MutAngularVelocity feederSetPoint;
     public MutVoltage feederVoltage;
