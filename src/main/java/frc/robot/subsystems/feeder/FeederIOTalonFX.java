@@ -38,9 +38,9 @@ public class FeederIOTalonFX implements FeederIO {
   private void configureTalons() {
     TalonFXConfiguration configFeeder = new TalonFXConfiguration();
     configFeeder.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    configFeeder.CurrentLimits.StatorCurrentLimit = 120.0;
+    configFeeder.CurrentLimits.StatorCurrentLimit = 80.0;
     configFeeder.CurrentLimits.StatorCurrentLimitEnable = true;
-    configFeeder.CurrentLimits.SupplyCurrentLimit = 60.0;
+    configFeeder.CurrentLimits.SupplyCurrentLimit = 20.0;
     configFeeder.CurrentLimits.SupplyCurrentLimitEnable = true;
     configFeeder.Voltage.PeakForwardVoltage = 12.0;
     configFeeder.Voltage.PeakReverseVoltage = -12.0;
@@ -51,7 +51,7 @@ public class FeederIOTalonFX implements FeederIO {
 
     TalonFXConfiguration configFollower = new TalonFXConfiguration();
     configFollower.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-    configFollower.CurrentLimits.StatorCurrentLimit = 60.0;
+    configFollower.CurrentLimits.StatorCurrentLimit = 80.0;
     configFollower.CurrentLimits.StatorCurrentLimitEnable = true;
     configFollower.CurrentLimits.SupplyCurrentLimit = 20.0;
     configFollower.CurrentLimits.SupplyCurrentLimitEnable = true;
