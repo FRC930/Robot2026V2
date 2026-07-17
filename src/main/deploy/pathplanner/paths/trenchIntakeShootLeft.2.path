@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.9974939759036148,
-        "y": 3.8492289156626507
+        "x": 2.500534477599179,
+        "y": 5.8360892612859105
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9950890209018044,
-        "y": 6.002816765736955
+        "x": 2.4923800872093023,
+        "y": 6.400101263252394
       },
       "isLocked": false,
-      "linkedName": "trenchIntakeShootLeft.1"
+      "linkedName": "tisl.1.end"
     },
     {
       "anchor": {
@@ -81,7 +81,7 @@
   "folder": "TrenchIntakeShootLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 144.25811390264585
   },
   "useDefaultConstraints": false
 }

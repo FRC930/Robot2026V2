@@ -32,32 +32,16 @@
     },
     {
       "anchor": {
-        "x": 3.276036144578313,
-        "y": 5.324469879518071
+        "x": 2.500534477599179,
+        "y": 5.8360892612859105
       },
       "prevControl": {
-        "x": 3.8497386565769793,
-        "y": 5.734346351238405
-      },
-      "nextControl": {
-        "x": 2.7023336325796463,
-        "y": 4.914593407797738
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 1.997,
-        "y": 3.8492289156626507
-      },
-      "prevControl": {
-        "x": 2.608951807228916,
-        "y": 4.5923132530120485
+        "x": 3.6447735336867297,
+        "y": 5.989868907807833
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "tisl.1.end"
     }
   ],
   "rotationTargets": [
@@ -66,7 +50,7 @@
       "rotationDegrees": 180.0
     },
     {
-      "waypointRelativePos": 2.75,
+      "waypointRelativePos": 1.9,
       "rotationDegrees": 180.0
     }
   ],
@@ -74,7 +58,7 @@
     {
       "name": "Over Bump Speed",
       "minWaypointRelativePos": 0.807940446650123,
-      "maxWaypointRelativePos": 2.4,
+      "maxWaypointRelativePos": 1.7,
       "constraints": {
         "maxVelocity": 3.0,
         "maxAcceleration": 9.0,
@@ -89,7 +73,7 @@
   "eventMarkers": [
     {
       "name": "SyncOdometry",
-      "waypointRelativePos": 1.819354838709669,
+      "waypointRelativePos": 1.4,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -100,7 +84,7 @@
     },
     {
       "name": "SyncOdometry",
-      "waypointRelativePos": 2.2719602977667535,
+      "waypointRelativePos": 1.65,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -111,7 +95,7 @@
     },
     {
       "name": "SyncOdometry",
-      "waypointRelativePos": 2.6173697270471257,
+      "waypointRelativePos": 1.8,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -131,7 +115,7 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 180.0
+    "rotation": 144.25811390264585
   },
   "reversed": false,
   "folder": "TrenchIntakeShootLeft",
