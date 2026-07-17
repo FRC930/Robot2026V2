@@ -178,7 +178,7 @@ public class RobotContainer {
 
         shooter = new ShooterSubsystem(new ShooterIOTalonFX(1, 2, 4, 3, upperCanbus));
 
-        indexer = new IndexerSubsystem(new IndexerIOTalonFX(7, upperCanbus, 6));
+        indexer = new IndexerSubsystem(new IndexerIOTalonFX(upperCanbus, 6));
 
         feeder = new FeederSubsystem(new FeederIOTalonFX(8, 13, upperCanbus));
 
