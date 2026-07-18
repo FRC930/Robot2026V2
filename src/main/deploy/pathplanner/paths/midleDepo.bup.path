@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.5991440798858774,
+        "y": 4.041469329529244
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.3491440798858774,
+        "y": 4.041469329529244
+      },
+      "isLocked": false,
+      "linkedName": "midleDepo.strt"
+    },
+    {
+      "anchor": {
+        "x": 2.07266330369357,
+        "y": 4.041469329529244
+      },
+      "prevControl": {
+        "x": 2.32266330369357,
+        "y": 4.041469329529244
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "midleDepo.bup"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "reversed": false,
+  "folder": "MidleDepo",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}
