@@ -20,44 +20,28 @@
         "y": 2.8001686746987957
       },
       "prevControl": {
-        "x": 6.544341422752349,
-        "y": 3.476190227386006
+        "x": 7.048753302347119,
+        "y": 3.1202135698241062
       },
       "nextControl": {
-        "x": 6.356640079001189,
-        "y": 2.197946434497675
+        "x": 5.813966292134832,
+        "y": 2.465584269662921
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.2323253012048188,
-        "y": 2.4176987951807236
+        "x": 1.7579438202247188,
+        "y": 1.762404494382023
       },
       "prevControl": {
-        "x": 4.177026769104578,
-        "y": 2.2672375522157404
-      },
-      "nextControl": {
-        "x": 2.2860912956757584,
-        "y": 2.5684041232079506
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 1.67,
-        "y": 3.849
-      },
-      "prevControl": {
-        "x": 1.9213373493975898,
-        "y": 3.2042650602409637
+        "x": 1.7375617977528082,
+        "y": 3.087235955056179
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "tisr.1.end"
     }
   ],
   "rotationTargets": [
@@ -66,15 +50,15 @@
       "rotationDegrees": 180.0
     },
     {
-      "waypointRelativePos": 2.8,
+      "waypointRelativePos": 1.9,
       "rotationDegrees": 179.09877466859373
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.5,
-      "maxWaypointRelativePos": 2.75,
+      "minWaypointRelativePos": 1.25,
+      "maxWaypointRelativePos": 1.9,
       "constraints": {
         "maxVelocity": 3.0,
         "maxAcceleration": 9.0,
@@ -89,7 +73,7 @@
   "eventMarkers": [
     {
       "name": "SyncOdometry",
-      "waypointRelativePos": 1.861042183622819,
+      "waypointRelativePos": 1.45,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -100,7 +84,7 @@
     },
     {
       "name": "SyncOdometry",
-      "waypointRelativePos": 2.099255583126551,
+      "waypointRelativePos": 1.55,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -111,7 +95,7 @@
     },
     {
       "name": "SyncOdometry",
-      "waypointRelativePos": 2.5101736972704507,
+      "waypointRelativePos": 1.75,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -131,7 +115,7 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 180.0
+    "rotation": -150.0
   },
   "reversed": false,
   "folder": "TrenchIntakeShootRight",

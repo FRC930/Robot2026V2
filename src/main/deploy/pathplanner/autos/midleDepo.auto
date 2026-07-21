@@ -7,6 +7,30 @@
         {
           "type": "path",
           "data": {
+            "pathName": "midleDepo.bup"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Idle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
             "pathName": "midleDepo.0"
           }
         },
@@ -38,12 +62,6 @@
           "type": "named",
           "data": {
             "name": "Idle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "midleDepo.2"
           }
         }
       ]

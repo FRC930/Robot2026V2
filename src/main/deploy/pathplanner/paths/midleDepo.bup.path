@@ -3,50 +3,38 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.4738764044943816,
-        "y": 5.981483146067416
+        "x": 3.5991440798858774,
+        "y": 4.041469329529244
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.6074940344754156,
-        "y": 5.770186366730267
+        "x": 3.3491440798858774,
+        "y": 4.041469329529244
       },
       "isLocked": false,
-      "linkedName": "midleDepo.0"
+      "linkedName": "midleDepo.strt"
     },
     {
       "anchor": {
-        "x": 1.516019971469329,
-        "y": 4.830727532097005
+        "x": 2.4509325842696628,
+        "y": 4.041469329529244
       },
       "prevControl": {
-        "x": 0.9919458308391144,
-        "y": 5.662769069268913
+        "x": 2.7009325842696628,
+        "y": 4.041469329529244
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "midleDepo.1"
+      "linkedName": "midleDepo.bup"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "Idle",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Idle"
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.2,
-    "maxAcceleration": 1.5,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -62,5 +50,5 @@
     "velocity": 0,
     "rotation": 180.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

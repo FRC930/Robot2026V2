@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.67,
-        "y": 3.849
+        "x": 1.7579438202247188,
+        "y": 1.762404494382023
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7246385542168672,
-        "y": 2.428397590361446
+        "x": 1.812582374441586,
+        "y": 0.3418020847434686
       },
       "isLocked": false,
-      "linkedName": "trenchIntakeShootRight.1"
+      "linkedName": "tisr.1.end"
     },
     {
       "anchor": {
@@ -21,7 +21,7 @@
       },
       "prevControl": {
         "x": 2.6912029987245787,
-        "y": 0.6178560445602851
+        "y": 0.6178560445602853
       },
       "nextControl": {
         "x": 3.1873419370814124,
@@ -128,7 +128,7 @@
   "folder": "TrenchIntakeShootRight",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -150.0
   },
   "useDefaultConstraints": false
 }
