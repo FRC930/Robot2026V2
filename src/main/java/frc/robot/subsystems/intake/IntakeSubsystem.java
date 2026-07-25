@@ -9,7 +9,7 @@ import static edu.wpi.first.units.Units.Fahrenheit;
 import static edu.wpi.first.units.Units.RPM;
 import static edu.wpi.first.units.Units.Volts;
 
-import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -40,7 +40,7 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
   public IntakeSubsystem(IntakeIO IO) {
     m_IO = IO;
     logged.rollerVelocity = RPM.mutable(0.0);
-    logged.rollerVelocitySetPoint = RPM.mutable(0.0);
+    logged.rollerVelocitySetPoint = Volts.mutable(0.0);
     logged.rollerSupplyCurrent = Amps.mutable(0.0);
     logged.rollerTorqueCurrent = Amps.mutable(0);
     logged.rollerVoltage = Volts.mutable(0);
@@ -55,7 +55,7 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
    *
    * @param speed
    */
-  public void setIntakeSpeed(AngularVelocity speed) {
+  public void setIntakeSpeed(Voltage speed) {
     m_IO.setRollerTargetSpeed(speed);
   }
 
@@ -129,7 +129,7 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case INTAKING:
-        m_IO.setRollerTargetSpeed(RPM.of(intakeTargetRPM.get()));
+        m_IO.setRollerTargetSpeed(Volts.of(intakeTargetRPM.get()));
         if (Constants.currentMode == Constants.Mode.SIM) {
           if (m_IO instanceof IntakeIOSim) {
             IntakeIOSim sim = (IntakeIOSim) m_IO;
@@ -138,7 +138,7 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case OUTTAKING:
-        m_IO.setRollerTargetSpeed(RPM.of(-intakeTargetRPM.get()));
+        m_IO.setRollerTargetSpeed(Volts.of(-intakeTargetRPM.get()));
         if (Constants.currentMode == Constants.Mode.SIM) {
           AimingService.trajectorySim.setSpawnFuelOnGround(false);
           if (m_IO instanceof IntakeIOSim) {
@@ -148,7 +148,7 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
         }
         break;
       case RAISED:
-        m_IO.setRollerTargetSpeed(RPM.of(intakeTargetRPM.get()));
+        m_IO.setRollerTargetSpeed(Volts.of(intakeTargetRPM.get()));
         if (Constants.currentMode == Constants.Mode.SIM) {
           AimingService.trajectorySim.setSpawnFuelOnGround(false);
           if (m_IO instanceof IntakeIOSim) {
@@ -206,10 +206,10 @@ public class IntakeSubsystem extends SubsystemBase implements IntakeEvents {
     return currentGoal.is(IntakeState.RAISED);
   }
 
-  public Command getNewSetIntakeVelocityCommand(DoubleSupplier rpm) {
+  public Command getNewSetIntakeVelocityCommand(DoubleSupplier volts) {
     return new InstantCommand(
         () -> {
-          m_IO.setRollerTargetSpeed(RPM.of(rpm.getAsDouble()));
+          m_IO.setRollerTargetSpeed(Volts.of(volts.getAsDouble()));
         },
         this);
   }

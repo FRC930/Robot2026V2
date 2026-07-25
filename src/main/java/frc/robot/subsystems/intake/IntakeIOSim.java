@@ -6,6 +6,7 @@ import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Meters;
 import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RPM;
+import static edu.wpi.first.units.Units.Volts;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -14,7 +15,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -29,7 +30,7 @@ public class IntakeIOSim implements IntakeIO {
   private final IntakeSimulation intakeSim;
 
   // intake Roller
-  private AngularVelocity m_rollerVelocitySetPoint = RPM.mutable(0.0);
+  private Voltage m_rollerVelocitySetPoint = Volts.mutable(0.0);
 
   private final FlywheelSim rollerFlyWheelSim;
   private final BooleanSupplier isSolutionValid;
@@ -83,14 +84,14 @@ public class IntakeIOSim implements IntakeIO {
   }
 
   @Override
-  public void setRollerTargetSpeed(AngularVelocity rpm) {
+  public void setRollerTargetSpeed(Voltage rpm) {
     m_rollerVelocitySetPoint = rpm;
   }
 
   @Override
   public void stop() {
     // If REAL robot use coast
-    setRollerTargetSpeed(RPM.of(0));
+    setRollerTargetSpeed(Volts.of(0));
     // Doing nothing with extender motor
     // setExtenderTargetAngle(Degrees.of(0));
   }
@@ -128,7 +129,7 @@ public class IntakeIOSim implements IntakeIO {
   private void updateRollerPID() {
     // Current velocity from simulation
     double currentVelocity = rollerFlyWheelSim.getAngularVelocity().in(RPM);
-    double targetVelocity = m_rollerVelocitySetPoint.in(RPM);
+    double targetVelocity = m_rollerVelocitySetPoint.in(Volts);
 
     // PID output (in volts) based on velocity error
     double pidOutput = rollerPID.calculate(currentVelocity, targetVelocity);
