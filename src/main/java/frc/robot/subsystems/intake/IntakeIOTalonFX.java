@@ -1,18 +1,18 @@
 package frc.robot.subsystems.intake;
 
-import static edu.wpi.first.units.Units.RPM;
+import static edu.wpi.first.units.Units.Volts;
 
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.NeutralOut;
-import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
+import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.measure.Voltage;
 import frc.robot.util.Gains;
 import frc.robot.util.PhoenixUtil;
 
@@ -20,8 +20,8 @@ public class IntakeIOTalonFX implements IntakeIO {
   TalonFX followIntakeMotor;
   TalonFX leaderIntakeMotor;
 
-  private VelocityTorqueCurrentFOC intakeRequest;
-  private AngularVelocity intakeSetPoint = RPM.of(0);
+  private VoltageOut intakeRequest;
+  private Voltage intakeSetPoint = Volts.of(0);
   boolean firstTime = true;
   public static double GEAR_RATIO_ROLLERS = 4.0 / 3.0;
 
@@ -31,7 +31,7 @@ public class IntakeIOTalonFX implements IntakeIO {
   public IntakeIOTalonFX(int IntakeLeadMotorCAN, int IntakeFollowMotorCAN, CANBus canbus) {
     leaderIntakeMotor = new TalonFX(IntakeLeadMotorCAN, canbus);
     followIntakeMotor = new TalonFX(IntakeFollowMotorCAN, canbus);
-    intakeRequest = new VelocityTorqueCurrentFOC(RPM.of(0.0)).withSlot(0);
+    intakeRequest = new VoltageOut(Volts.of(0));
     configureTalons();
   }
 
@@ -90,13 +90,13 @@ public class IntakeIOTalonFX implements IntakeIO {
   @Override
   public void stop() {
     leaderIntakeMotor.setControl(m_brake);
-    intakeSetPoint = RPM.of(0.0);
+    intakeSetPoint = Volts.of(0.0);
   }
 
   @Override
-  public void setRollerTargetSpeed(AngularVelocity target) {
-    if (target.in(RPM) != intakeSetPoint.in(RPM)) {
-      leaderIntakeMotor.setControl(intakeRequest.withVelocity(target));
+  public void setRollerTargetSpeed(Voltage target) {
+    if (target.in(Volts) != intakeSetPoint.in(Volts)) {
+      leaderIntakeMotor.setControl(intakeRequest.withOutput(target));
       intakeSetPoint = target;
     }
   }

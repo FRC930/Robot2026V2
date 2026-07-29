@@ -1,10 +1,10 @@
 package frc.robot.subsystems.intake;
 
-import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.MutAngularVelocity;
 import edu.wpi.first.units.measure.MutCurrent;
 import edu.wpi.first.units.measure.MutTemperature;
 import edu.wpi.first.units.measure.MutVoltage;
+import edu.wpi.first.units.measure.Voltage;
 import frc.robot.util.Gains;
 import org.littletonrobotics.junction.AutoLog;
 
@@ -12,7 +12,7 @@ public interface IntakeIO {
   @AutoLog
   public static class IntakeInputs {
     public MutAngularVelocity rollerVelocity;
-    public MutAngularVelocity rollerVelocitySetPoint;
+    public MutVoltage rollerVelocitySetPoint;
     public MutCurrent rollerSupplyCurrent;
     public MutCurrent rollerTorqueCurrent;
     public MutVoltage rollerVoltage;
@@ -22,7 +22,7 @@ public interface IntakeIO {
     public int numberFuelHave;
   }
 
-  public default void setRollerTargetSpeed(AngularVelocity target) {}
+  public default void setRollerTargetSpeed(Voltage target) {}
   ;
 
   public default void stop() {}
