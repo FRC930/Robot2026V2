@@ -24,7 +24,7 @@ public final class AimingConstants {
 
   // ===== SHOOTER PARAMETERS (tunable) =====
   public static final double FLYWHEEL_RADIUS_M = Units.inchesToMeters(2.0);
-  public static final double SPEED_TRANSFER_RATIO = 0.68;
+  public static final double SPEED_TRANSFER_RATIO = 0.74;
   public static final double SHOOTER_MIN_RPM = 1000.0;
   public static final double SHOOTER_MAX_RPM = 6000.0;
 
