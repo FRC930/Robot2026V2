@@ -108,8 +108,8 @@ public class RobotContainer {
   public static final SwerveDriveSimulation driveSimulation =
       new SwerveDriveSimulation(Drive.mapleSimConfig, new Pose2d(3, 3, new Rotation2d()));
 
-  private final double REG_DRIVE_SPEED = 1.0;
-  private final double REG_ANGULAR_SPEED = 0.75;
+  private final double REG_DRIVE_SPEED = 0.5;
+  private final double REG_ANGULAR_SPEED = 0.4;
 
   private final IntakeSubsystem intake;
   private final IndexerSubsystem indexer;
@@ -349,8 +349,8 @@ public class RobotContainer {
     drive.setDefaultCommand(
         DriveCommands.joystickDrive(
             drive,
-            () -> -controller.getLeftY() * drive.getEffectiveSpeedLimit(),
-            () -> -controller.getLeftX() * drive.getEffectiveSpeedLimit(),
+            () -> -controller.getLeftY() * REG_DRIVE_SPEED,
+            () -> -controller.getLeftX() * REG_DRIVE_SPEED,
             () -> -controller.getRightX() * REG_ANGULAR_SPEED,
             aimingService));
 

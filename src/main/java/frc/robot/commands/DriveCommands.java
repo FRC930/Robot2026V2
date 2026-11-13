@@ -48,6 +48,7 @@ public class DriveCommands {
   private static final double WHEEL_RADIUS_RAMP_RATE = 0.05; // Rad/Sec^2
   private static final double AUTO_AIM_TOLERANCE = 0.04;
   private static final double SLEW_RATE = 20;
+  private static final boolean DEMO_MODE = true;
   public static boolean m_snakeModeOn = false;
   public static boolean s_aimingLinedUp = false;
 
@@ -176,7 +177,7 @@ public class DriveCommands {
                   getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
               double omega;
               boolean useSnake = robotGoals.isIntakingTrigger().getAsBoolean();
-              boolean useAiming = robotGoals.isShootingTrigger().getAsBoolean();
+              boolean useAiming = (!DEMO_MODE) && robotGoals.isShootingTrigger().getAsBoolean();
 
               if (!forceAutoAim && m_snakeModeOn && useSnake) {
                 // Gets the controller angle as a double so we can use it to spin the robot using
